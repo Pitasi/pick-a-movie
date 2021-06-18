@@ -1,0 +1,90 @@
+<script context="module" lang="ts">
+	import type { Load } from '@sveltejs/kit';
+	import type { List } from './api/[uid].json';
+
+	type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>;
+
+	async function getList(fetch: Fetch, id: string): Promise<List> {
+		const res = await fetch(`./api/${id}.json`);
+		const data = await res.json();
+		return data;
+	}
+
+	async function getMovie(fetch: Fetch, id: string): Promise<MovieDetails> {
+		const res = await fetch(`/movies/${id}.json`);
+		const movie = await res.json();
+		return movie;
+	}
+
+	export interface UIList {
+		uid: string;
+		title: string;
+		movies: UIMovie[];
+	}
+
+	export interface UIMovie {
+		details: MovieDetails;
+		votes: number;
+	}
+
+	// see https://kit.svelte.dev/docs#loading
+	export const load: Load = async ({ fetch, page }) => {
+		const uid = page.params['uid'];
+		const list = await getList(fetch, uid);
+		const movies = await Promise.all(
+			list.items.map(async (item) => ({
+				details: await getMovie(fetch, item.movieId),
+				votes: item.votes
+			}))
+		);
+		const uiList: UIList = {
+			uid,
+			title: list.title,
+			movies
+		};
+		return {
+			props: { list: uiList }
+		};
+	};
+</script>
+
+<script lang="ts">
+	import type { MovieDetails } from '../movies/_api';
+	import MovieCard from '$lib/MovieCard/index.svelte';
+	import Searchbox from '$lib/Searchbox/index.svelte';
+	import { fade, fly } from 'svelte/transition';
+
+	export let list: UIList;
+
+	async function onAdd(details: MovieDetails) {
+		list = {
+			...list,
+			movies: [...list.movies, { details, votes: 1 }]
+		};
+		await fetch(`/lists/api/${list.uid}.json`, {
+			method: 'put',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				movieId: details.id
+			})
+		});
+	}
+</script>
+
+<svelte:head>
+	<title>{list.title} - pick a movie</title>
+</svelte:head>
+
+{#if list}
+	<h1>{list.title}</h1>
+	<Searchbox {onAdd} />
+	{#each list.movies as movie (movie.details.id)}
+		<div in:fade out:fly={{ x: 100 }}>
+			<MovieCard details={movie.details} />
+		</div>
+	{/each}
+{/if}
+
+<style></style>

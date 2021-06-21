@@ -30,6 +30,11 @@
 			return data.results;
 		}
 	);
+
+	const clearBoxOnAdd: OnAddFunction = (details) => {
+		$query = null;
+		return onAdd(details);
+	};
 </script>
 
 <input type="text" placeholder="Search a movie" bind:value={$query} />
@@ -40,7 +45,7 @@
 	{#if results?.length}
 		<div class="search-results">
 			{#each results as result (result.id)}
-				<Result details={result} {onAdd} />
+				<Result details={result} onAdd={clearBoxOnAdd} />
 			{/each}
 		</div>
 	{/if}

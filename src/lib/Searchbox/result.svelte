@@ -3,6 +3,7 @@
 
 	export let details: MovieDetails;
 	export let onAdd;
+	export let canAdd;
 
 	function onClick() {
 		onAdd(details);
@@ -16,5 +17,5 @@
 		alt={`Poster of ${details.title}`}
 	/>
 	<h2>{details.title}</h2>
-	<button on:click={onClick}>+</button>
+	<button disabled={!canAdd(details)} on:click={onClick}>+</button>
 </div>

@@ -56,20 +56,31 @@
 
 	export let list: UIList;
 
+	function canAdd(details: MovieDetails): boolean {
+		return !list.movies.find((movie) => movie.details.id == details.id);
+	}
+
 	async function onAdd(details: MovieDetails) {
-		list = {
+		const newList = {
 			...list,
 			movies: [...list.movies, { details, votes: 1 }]
 		};
-		await fetch(`/lists/api/${list.uid}.json`, {
-			method: 'put',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				movieId: details.id
-			})
-		});
+		const oldList = list;
+		list = newList;
+
+		try {
+			await fetch(`/lists/api/${list.uid}.json`, {
+				method: 'put',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					movieId: details.id
+				})
+			});
+		} catch (err) {
+			list = oldList;
+		}
 	}
 </script>
 
@@ -79,7 +90,7 @@
 
 {#if list}
 	<h1>{list.title}</h1>
-	<Searchbox {onAdd} />
+	<Searchbox {canAdd} {onAdd} />
 	{#each list.movies as movie (movie.details.id)}
 		<div in:fade out:fly={{ x: 100 }}>
 			<MovieCard details={movie.details} />

@@ -6,8 +6,10 @@
 	import Result from './result.svelte';
 
 	type OnAddFunction = (d: MovieDetails) => void;
-
 	export let onAdd: OnAddFunction = () => {};
+
+	type CanAddFunction = (d: MovieDetails) => boolean;
+	export let canAdd: CanAddFunction = () => true;
 
 	const query = writable<string>(null);
 
@@ -45,7 +47,7 @@
 	{#if results?.length}
 		<div class="search-results">
 			{#each results as result (result.id)}
-				<Result details={result} onAdd={clearBoxOnAdd} />
+				<Result details={result} {canAdd} onAdd={clearBoxOnAdd} />
 			{/each}
 		</div>
 	{/if}

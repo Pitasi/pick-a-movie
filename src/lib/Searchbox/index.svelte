@@ -1,5 +1,7 @@
 <script lang="ts">
-	import debounce from 'lodash/debounce';
+	import { writable, derived } from 'svelte/store';
+	import type { Readable } from 'svelte/store';
+
 	import type { MovieDetails } from 'src/routes/movies/_api';
 	import Result from './result.svelte';
 
@@ -7,25 +9,39 @@
 
 	export let onAdd: OnAddFunction = () => {};
 
-	async function search(query: string) {
-		const res = await fetch(`/movies/query?q=${query}`);
-		const data = await res.json();
-		return data.results;
-	}
+	const query = writable<string>(null);
 
-	const handleInput = debounce(async (e) => {
-		const query = e.target.value;
-		results = await search(query);
-	}, 300);
+	const debouncedQuery = derived(query, (currentQuery, set) => {
+		const timeoutId = setTimeout(() => {
+			return set(currentQuery);
+		}, 300);
 
-	let results: MovieDetails[];
+		return () => clearTimeout(timeoutId);
+	});
+
+	const resultsPromise: Readable<Promise<MovieDetails[]>> = derived(
+		debouncedQuery,
+		async (value): Promise<MovieDetails[]> => {
+			if (!value) {
+				return null;
+			}
+			const res = await fetch(`/movies/query?q=${value}`);
+			const data = await res.json();
+			return data.results;
+		}
+	);
 </script>
 
-<input type="text" placeholder="Search a movie" on:input={handleInput} />
-{#if results && results.length}
-	<div class="search-results">
-		{#each results as result (result.id)}
-			<Result details={result} {onAdd} />
-		{/each}
-	</div>
-{/if}
+<input type="text" placeholder="Search a movie" bind:value={$query} />
+
+{#await $resultsPromise}
+	<div class="search-results">searching...</div>
+{:then results}
+	{#if results?.length}
+		<div class="search-results">
+			{#each results as result (result.id)}
+				<Result details={result} {onAdd} />
+			{/each}
+		</div>
+	{/if}
+{/await}

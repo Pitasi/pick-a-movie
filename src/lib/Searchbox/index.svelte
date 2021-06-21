@@ -3,7 +3,9 @@
 	import type { MovieDetails } from 'src/routes/movies/_api';
 	import Result from './result.svelte';
 
-	export let onAdd = () => {};
+	type OnAddFunction = (d: MovieDetails) => void;
+
+	export let onAdd: OnAddFunction = () => {};
 
 	async function search(query: string) {
 		const res = await fetch(`/movies/query?q=${query}`);

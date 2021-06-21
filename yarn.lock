@@ -84,10 +84,12 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@sveltejs/adapter-vercel@^1.0.0-next.0":
-  version "1.0.0-next.0"
-  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-vercel/-/adapter-vercel-1.0.0-next.0.tgz#5a82c4eab9df72e851b23161ace0f64beaa8cabf"
-  integrity sha512-dQf40/2vrgRfuQ++tIAlvEgjdGUkXJTSjO5syqJd5oH2HDbP3Shi+2AxWpKAqRFGyRbXDe9ej0MK1G2soZP4fQ==
+"@sveltejs/adapter-vercel@next":
+  version "1.0.0-next.22"
+  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-vercel/-/adapter-vercel-1.0.0-next.22.tgz#b6f237b696b128580aede6bb78973b1d649608c7"
+  integrity sha512-C9JL/4/CQR1BqEwyKFr6wCyejzIjwyC0nkA73TzGllIiPHxbJ3AykYZ4Ak7DFcZj9UNz8AmNbyzkuJTz3j2qJQ==
+  dependencies:
+    esbuild "^0.12.5"
 
 "@sveltejs/kit@next":
   version "1.0.0-next.113"
@@ -1122,11 +1124,6 @@ shebang-regex@^3.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
-skeleton-elements@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/skeleton-elements/-/skeleton-elements-3.3.0.tgz#7298df4296de02925d152c05202f5031fa857e1f"
-  integrity sha512-vynb/KHHZJ79xW0O9vmiFdqRboxM1VNmRnFP5qcCDa6wKLVd64BlnCFQRt8Ll0v41Qf7efXqo5mDr/9rcp1YCw==
-
 slash@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
@@ -1232,6 +1229,11 @@ svelte-preprocess@^4.0.0:
     "@types/sass" "^1.16.0"
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
+
+svelte-skeleton@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/svelte-skeleton/-/svelte-skeleton-1.1.0.tgz#7da60d27f75dd51ba4ee858a9ac894584480ac14"
+  integrity sha512-ZthIi+Otvv39l35woDnv9of7CGw6if7l2EoZXqreXS+XcJDVGh09yN+lkl8Cn9tqLTann0Tuz4Mp+XPKdevS5w==
 
 svelte@^3.34.0:
   version "3.38.2"

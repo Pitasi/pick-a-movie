@@ -1,5 +1,6 @@
 import vercel from '@sveltejs/adapter-vercel';
 import preprocess from 'svelte-preprocess';
+import WindiCSS from 'vite-plugin-windicss';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -8,10 +9,17 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
+
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
-		adapter: vercel()
-	}
+		adapter: vercel(),
+
+		vite: () => ({
+			plugins: [
+				WindiCSS.default(),
+			]
+		}),
+	},
 };
 
 export default config;

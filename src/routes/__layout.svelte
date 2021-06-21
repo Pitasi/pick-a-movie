@@ -1,4 +1,11 @@
 <script lang="ts">
+	import 'virtual:windi.css';
+	import { browser } from '$app/env';
+	if (browser) {
+		// @ts-ignore
+		import('virtual:windi-devtools');
+	}
+
 	import Header from '$lib/Header/index.svelte';
 	import Skeleton from '$lib/Skeletons/index.svelte';
 	import { navigating } from '$app/stores';
@@ -14,6 +21,9 @@
 	let currentNavigating: Navigating;
 	navigating.subscribe((val) => (currentNavigating = val));
 </script>
+
+<h1 class="text-pink-200">bo</h1>
+<button class="bg-pink-400"> Button </button>
 
 <Header />
 

@@ -29,10 +29,3 @@
 		{/each}
 	</div>
 {/if}
-
-<style>
-	.search-results {
-		max-height: 200px;
-		overflow-y: auto;
-	}
-</style>

@@ -4,18 +4,34 @@
 	export let details: MovieDetails;
 </script>
 
-<article class="flex flex-row gap-4">
-	<!-- <img src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${details.backdrop_path}`} /> -->
+<article position="relative" overflow="hidden" class="transition-all">
 	<img
-		style="width:32px;"
-		src={`https://image.tmdb.org/t/p/w200/${details.poster_path}`}
-		alt={`Poster of ${details.title}`}
+		display="block"
+		class="transform top-1/2 -translate-y-1/2"
+		left="0"
+		w="full"
+		style="z-index: -1"
+		position="absolute"
+		src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${details.backdrop_path}`}
+		alt="Backdrop"
 	/>
-	<div>
-		<h2>{details.title}</h2>
-		<a text="xs" href="https://www.themoviedb.org/movie/{details.id}" target="_blank">
-			See this movie on TMDB
-		</a>
+	<div
+		class="flex flex-row gap-4 backdrop-filter backdrop-blur"
+		p="4"
+		bg="white opacity-50"
+		rounded="md"
+	>
+		<img
+			style="width:32px;"
+			src={`https://image.tmdb.org/t/p/w200/${details.poster_path}`}
+			alt={`Poster of ${details.title}`}
+		/>
+		<div>
+			<h2 text="lg">{details.title}</h2>
+			<a text="xs" href="https://www.themoviedb.org/movie/{details.id}" target="_blank">
+				See this movie on TMDB
+			</a>
+		</div>
 	</div>
 </article>
 

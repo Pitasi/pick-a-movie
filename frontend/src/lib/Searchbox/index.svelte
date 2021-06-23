@@ -39,13 +39,13 @@
 	};
 </script>
 
-<input type="text" placeholder="Search a movie" bind:value={$query} />
+<input p="4" w="full" type="text" placeholder="Search a movie" bind:value={$query} />
 
 {#await $resultsPromise}
 	<div class="search-results">searching...</div>
 {:then results}
 	{#if results?.length}
-		<div class="search-results">
+		<div class="flex flex-col gap-2">
 			{#each results as result (result.id)}
 				<Result details={result} {canAdd} onAdd={clearBoxOnAdd} />
 			{/each}

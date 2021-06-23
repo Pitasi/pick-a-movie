@@ -22,19 +22,22 @@
 	navigating.subscribe((val) => (currentNavigating = val));
 </script>
 
-<h1 class="text-pink-200">bo</h1>
-<button class="bg-pink-400"> Button </button>
+<div class="container mx-auto">
+	<div class="flex flex-row flex-wrap">
+		<aside class="w-full sm:w-1/3 md:w-1/4">
+			<Header />
+		</aside>
 
-<Header />
+		<main role="main" class="w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
+			{#if $navigating && $delayedNavigating}
+				<Skeleton page={currentNavigating.to} />
+			{:else}
+				<slot />
+			{/if}
+		</main>
+	</div>
 
-<main>
-	{#if $navigating && $delayedNavigating}
-		<Skeleton page={currentNavigating.to} />
-	{:else}
-		<slot />
-	{/if}
-</main>
-
-<footer>
-	<a href="https://anto.pt">anto.pt</a>
-</footer>
+	<footer text="center" bg="pink-100">
+		<a text="pink-600" href="https://anto.pt">anto.pt</a>
+	</footer>
+</div>

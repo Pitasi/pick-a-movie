@@ -6,12 +6,14 @@
 </script>
 
 <article in:fade out:fly={{ x: 100 }} w="220px" class="flex" flex="col shrink-0" gap="4">
-	<picture border="rounded-xl" overflow="hidden">
+	<picture border="rounded-xl" overflow="hidden" class="shadow-lg">
 		<img
 			loading="lazy"
 			width="220px"
 			height="330px"
-			src={`https://image.tmdb.org/t/p/w220_and_h330_face/${details.poster_path}`}
+			src={details.poster_path
+				? `https://image.tmdb.org/t/p/w220_and_h330_face/${details.poster_path}`
+				: 'https://via.placeholder.com/220x330.png?text=%20'}
 			alt={`Poster of ${details.title}`}
 		/>
 	</picture>

@@ -3,7 +3,7 @@
 	import type { Readable } from 'svelte/store';
 
 	import type { MovieDetails } from 'src/routes/movies/_api';
-	import Result from './result.svelte';
+	import ResultList from './result-list.svelte';
 
 	type OnAddFunction = (d: MovieDetails) => void;
 	export let onAdd: OnAddFunction = () => {};
@@ -37,18 +37,31 @@
 		$query = null;
 		return onAdd(details);
 	};
+
+	const searchBoxEl = writable(null);
+	const resultsTopPos = derived(searchBoxEl, (value) => {
+		if (!value) {
+			return 0;
+		}
+		const rect = value.getBoundingClientRect();
+		const gap = 20;
+		return rect.top + rect.height + gap;
+	});
 </script>
 
-<input p="4" w="full" type="text" placeholder="Search a movie" bind:value={$query} />
+<input
+	p="4"
+	w="full"
+	type="text"
+	placeholder="Add a movie to this list"
+	bind:value={$query}
+	bind:this={$searchBoxEl}
+/>
 
 {#await $resultsPromise}
 	<div class="search-results">searching...</div>
 {:then results}
 	{#if results?.length}
-		<div class="flex flex-col gap-2">
-			{#each results as result (result.id)}
-				<Result details={result} {canAdd} onAdd={clearBoxOnAdd} />
-			{/each}
-		</div>
+		<ResultList {results} {canAdd} onAdd={clearBoxOnAdd} topPosition={resultsTopPos} />
 	{/if}
 {/await}

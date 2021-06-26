@@ -91,12 +91,11 @@
 	<div class="flex" flex="col" gap="8">
 		<div
 			class="flex bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
-			p="4"
-			py="8"
+			p="4 y-8"
 			flex="col"
 			gap="4"
 		>
-			<h1 font="bold" text="white">{list.title}</h1>
+			<h1 font="bold" text="white 4xl">{list.title}</h1>
 			<Searchbox {canAdd} {onAdd} />
 		</div>
 		<div class="grid" grid="cols-1 sm:cols-2 md:cols-3 lg:cols-4" justify="items-center" gap="y-12">
@@ -106,5 +105,3 @@
 		</div>
 	</div>
 {/if}
-
-<style></style>

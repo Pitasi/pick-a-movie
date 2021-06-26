@@ -1,45 +1,25 @@
 <script lang="ts">
 	import type { MovieDetails } from 'src/routes/movies/_api';
+	import { fade, fly } from 'svelte/transition';
 
 	export let details: MovieDetails;
 </script>
 
-<article position="relative" overflow="hidden" class="transition-all">
-	<img
-		display="block"
-		class="transform top-1/2 -translate-y-1/2"
-		left="0"
-		w="full"
-		style="z-index: -1"
-		position="absolute"
-		src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${details.backdrop_path}`}
-		alt="Backdrop"
-	/>
-	<div
-		class="flex flex-row gap-4 backdrop-filter backdrop-blur"
-		p="4"
-		bg="white opacity-50"
-		rounded="md"
-	>
+<article in:fade out:fly={{ x: 100 }} w="220px" class="flex" flex="col shrink-0" gap="4">
+	<picture border="rounded-xl" overflow="hidden">
 		<img
-			style="width:32px;"
-			src={`https://image.tmdb.org/t/p/w200/${details.poster_path}`}
+			loading="lazy"
+			width="220px"
+			height="330px"
+			src={`https://image.tmdb.org/t/p/w220_and_h330_face/${details.poster_path}`}
 			alt={`Poster of ${details.title}`}
 		/>
-		<div>
-			<h2 text="lg">{details.title}</h2>
-			<a text="xs" href="https://www.themoviedb.org/movie/{details.id}" target="_blank">
-				See this movie on TMDB
-			</a>
-		</div>
+	</picture>
+
+	<div>
+		<h2 font="bold">{details.title}</h2>
+		<a text="xs" href="https://www.themoviedb.org/movie/{details.id}" target="_blank">
+			See this movie on TMDB
+		</a>
 	</div>
 </article>
-
-<style>
-	article {
-		background: rgba(0, 0, 0, 0.03);
-		border-radius: 8px;
-		padding: 1em;
-		margin-bottom: 1em;
-	}
-</style>

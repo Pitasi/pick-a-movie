@@ -1,0 +1,305 @@
+basePath: /v1
+definitions:
+  CreateProposalRequest:
+    properties:
+      comment:
+        type: string
+      movieId:
+        type: integer
+      sessionId:
+        type: integer
+    required:
+    - movieId
+    - sessionId
+    type: object
+  CreateSessionRequest:
+    properties:
+      endAt:
+        type: string
+      startAt:
+        type: string
+    required:
+    - endAt
+    - startAt
+    type: object
+  CreateVoteRequest:
+    properties:
+      id:
+        type: integer
+    required:
+    - id
+    type: object
+  Proposal:
+    properties:
+      comment:
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: integer
+      movieId:
+        type: integer
+      session:
+        $ref: '#/definitions/Session'
+      sessionId:
+        type: integer
+      updatedAt:
+        type: string
+      votes:
+        items:
+          $ref: '#/definitions/Vote'
+        type: array
+    required:
+    - id
+    - movieId
+    - sessionId
+    type: object
+  Session:
+    properties:
+      createdAt:
+        type: string
+      endAt:
+        example: "2011-10-05T14:48:00.000Z"
+        type: string
+      id:
+        type: integer
+      proposals:
+        items:
+          $ref: '#/definitions/Proposal'
+        type: array
+      startAt:
+        example: "2011-10-05T14:48:00.000Z"
+        type: string
+      updatedAt:
+        type: string
+    required:
+    - endAt
+    - id
+    - startAt
+    type: object
+  Vote:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      proposalId:
+        type: integer
+      updatedAt:
+        type: string
+    required:
+    - id
+    - proposalId
+    type: object
+host: localhost:1337
+info:
+  contact: {}
+  description: May the force be with us
+  title: PickAMovie Swagger API
+  version: "1.0"
+paths:
+  /proposals:
+    get:
+      consumes:
+      - application/json
+      description: get proposals
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Proposal'
+            type: array
+      summary: List proposals
+      tags:
+      - Proposal
+    post:
+      consumes:
+      - application/json
+      description: create proposals
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/CreateProposalRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Proposal'
+        "400":
+          description: Invalid payload
+          schema:
+            type: string
+        "404":
+          description: Session ID not found
+          schema:
+            type: string
+        "500":
+          description: Database operation failed
+          schema:
+            type: string
+      summary: Create a new proposal
+      tags:
+      - Proposal
+  /proposals/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get a specific proposal
+      parameters:
+      - description: Proposal ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Proposal'
+        "400":
+          description: Invalid payload
+          schema:
+            type: string
+        "404":
+          description: Proposal not found
+          schema:
+            type: string
+        "500":
+          description: Database operation failed
+          schema:
+            type: string
+      summary: Get a proposal
+      tags:
+      - Proposal
+  /sessions:
+    get:
+      consumes:
+      - application/json
+      description: get sessions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Session'
+            type: array
+      summary: List sessions
+      tags:
+      - Session
+    post:
+      consumes:
+      - application/json
+      description: create session
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/CreateSessionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Session'
+        "400":
+          description: Invalid payload
+          schema:
+            type: string
+        "500":
+          description: Database operation failed
+          schema:
+            type: string
+      summary: Create a new session
+      tags:
+      - Session
+  /sessions/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get a specific session
+      parameters:
+      - description: Session ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Session'
+        "400":
+          description: Invalid payload
+          schema:
+            type: string
+        "404":
+          description: Session not found
+          schema:
+            type: string
+        "500":
+          description: Database operation failed
+          schema:
+            type: string
+      summary: Get a session
+      tags:
+      - Session
+  /votes:
+    post:
+      consumes:
+      - application/json
+      description: create vote
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/CreateVoteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Vote'
+        "400":
+          description: Invalid payload
+          schema:
+            type: string
+        "403":
+          description: Proposal session closed
+          schema:
+            type: string
+        "404":
+          description: Proposal not found
+          schema:
+            type: string
+        "500":
+          description: Database operation failed
+          schema:
+            type: string
+      summary: Create a new vote
+      tags:
+      - Vote
+swagger: "2.0"
+tags:
+- name: Proposal
+- name: Session
+- name: Vote

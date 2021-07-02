@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   "stories": [
     "../src/**/*.stories.mdx",
@@ -11,5 +13,19 @@ module.exports = {
   "svelteOptions": {
     // https://github.com/storybookjs/storybook/issues/11587
     // "preprocess": require("../svelte.config.js").preprocess
+  },
+  webpackFinal: async (config) => {
+    config.resolve = {
+      alias: {
+        '$app/stores': path.resolve(__dirname, '../node_modules/@sveltejs/kit/assets/runtime/app/stores.js'),
+      },
+    };
+
+    const svelteLoader = config.module.rules.find(
+      (r) => r.loader && r.loader.includes("svelte-loader"),
+    );
+    svelteLoader.options.preprocess = require("svelte-preprocess")({});
+
+    return config;
   }
 }

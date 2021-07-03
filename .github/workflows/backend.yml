@@ -1,9 +1,11 @@
-name: ci
+name: backend
 
 on:
   push:
     branches:
       - "main"
+    paths:
+      - backend/
 
 env:
   REGISTRY: ghcr.io

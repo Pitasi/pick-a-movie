@@ -1,4 +1,5 @@
 const path = require('path');
+const WindiCSS = require('windicss-webpack-plugin');
 
 module.exports = {
   "stories": [
@@ -17,9 +18,11 @@ module.exports = {
   webpackFinal: async (config) => {
     config.resolve = {
       alias: {
-        '$app/stores': path.resolve(__dirname, '../node_modules/@sveltejs/kit/assets/runtime/app/stores.js'),
+        '$app': path.resolve(__dirname, '../node_modules/@sveltejs/kit/assets/runtime/app'),
       },
     };
+
+    config.plugins.push(new WindiCSS.default());
 
     const svelteLoader = config.module.rules.find(
       (r) => r.loader && r.loader.includes("svelte-loader"),

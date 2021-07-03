@@ -100,7 +100,12 @@
 		</div>
 		<div class="grid" grid="cols-1 sm:cols-2 md:cols-3 lg:cols-4" justify="items-center" gap="y-12">
 			{#each list.movies as movie (movie.details.id)}
-				<MovieCard details={movie.details} />
+				<MovieCard
+					details={movie.details}
+					on:addFavorite={() => {
+						console.log('added');
+					}}
+				/>
 			{/each}
 		</div>
 	</div>

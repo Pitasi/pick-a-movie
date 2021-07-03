@@ -9097,6 +9097,11 @@ svelte-hmr@^0.14.2, svelte-hmr@^0.14.4:
   resolved "https://registry.npmjs.org/svelte-hmr/-/svelte-hmr-0.14.4.tgz"
   integrity sha512-kItFF7vqzStckSigoFmMnxJpTOdB9TWnQAW6Js+yAB4277tLbJIIE5KBlGHNmJNpA7MguqidsPB27Uw5UzQPCA==
 
+svelte-icons@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/svelte-icons/-/svelte-icons-2.1.0.tgz#6f2ec72f1d5c8b2de1a4b8a822c95bcb2f701aca"
+  integrity sha512-rHPQjweEc9fGSnvM0/4gA3pDHwyZyYsC5KhttCZRhSMJfLttJST5Uq0B16Czhw+HQ+HbSOk8kLigMlPs7gZtfg==
+
 svelte-loader@^3.1.2:
   version "3.1.2"
   resolved "https://registry.npmjs.org/svelte-loader/-/svelte-loader-3.1.2.tgz"

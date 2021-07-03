@@ -13,7 +13,9 @@
 
 	<br />
 
-	<a href="/lists/1" text="pink-500" font="bold">click here to open a sample movie list!</a>
+	<a sveltekit:prefetch href="/lists/1" text="pink-500" font="bold">
+		click here to open a sample movie list!
+	</a>
 </div>
 
 <style>

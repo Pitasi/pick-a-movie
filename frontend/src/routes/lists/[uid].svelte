@@ -5,7 +5,7 @@
 	type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>;
 
 	async function getList(fetch: Fetch, id: string): Promise<List> {
-		const res = await fetch(`./api/${id}.json`);
+		const res = await fetch(`/lists/api/${id}.json`);
 		const data = await res.json();
 		return data;
 	}

@@ -19,6 +19,7 @@ module.exports = {
     config.resolve = {
       alias: {
         '$app': path.resolve(__dirname, '../node_modules/@sveltejs/kit/assets/runtime/app'),
+        '$lib': path.resolve(__dirname, '../src/lib'),
       },
     };
 

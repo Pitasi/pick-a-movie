@@ -10,15 +10,22 @@
 </Template>
 
 <Story
-	name="Simple movie"
+	name="Simple movie poster"
 	args={{
-		href: 'https://image.tmdb.org/t/p/w220_and_h330_face/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg'
+		src: 'https://image.tmdb.org/t/p/w220_and_h330_face/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg'
 	}}
 />
 
 <Story
-	name="Custom action name"
+	name="Fallback"
 	args={{
-		href: 'https://image.tmdb.org/t/p/w220_and_h330_face/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg'
+		src: 'https://image.tmdb.org/t/p/xxxxxxxxxx.jpg'
+	}}
+/>
+
+<Story
+	name="No src"
+	args={{
+		src: undefined
 	}}
 />

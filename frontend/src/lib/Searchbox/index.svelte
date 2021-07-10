@@ -4,6 +4,7 @@
 
 	import type { MovieDetails } from 'src/routes/movies/_api';
 	import ResultList from './result-list.svelte';
+	import Loading from './loading.svelte';
 
 	type OnAddFunction = (d: MovieDetails) => void;
 	export let onAdd: OnAddFunction = () => {};
@@ -49,19 +50,29 @@
 	});
 </script>
 
-<input
-	p="4"
-	w="full"
-	type="text"
-	placeholder="Add a movie to this list"
-	bind:value={$query}
-	bind:this={$searchBoxEl}
-/>
+<div pos="relative">
+	<input
+		p="4"
+		w="full"
+		type="text"
+		placeholder="Add a movie to this list"
+		bind:value={$query}
+		bind:this={$searchBoxEl}
+	/>
 
-{#await $resultsPromise}
-	<div class="search-results">searching...</div>
-{:then results}
-	{#if results?.length}
-		<ResultList {results} {canAdd} onAdd={clearBoxOnAdd} topPosition={resultsTopPos} />
+	{#if $debouncedQuery}
+		{#await $resultsPromise}
+			<div pos="absolute" top="1/2" right="0" class="transform" translate="-y-1/2">
+				<Loading size="small" />
+			</div>
+		{/await}
 	{/if}
-{/await}
+</div>
+
+{#if $debouncedQuery}
+	{#await $resultsPromise then results}
+		{#if results?.length}
+			<ResultList {results} {canAdd} onAdd={clearBoxOnAdd} topPosition={resultsTopPos} />
+		{/if}
+	{/await}
+{/if}

@@ -55,28 +55,7 @@
 	}
 
 	async function onAdd(details: MovieDetails) {
-		const currentSession = { ...session };
-		const proposalId = Math.random();
-		session = {
-			...session,
-			proposals: [
-				...session.proposals,
-				{
-					comment: null,
-					createdAt: null,
-					id: proposalId,
-					movieId: details.id,
-					session,
-					sessionId: session.id,
-					votes: [
-						{
-							id: Math.random(),
-							proposalId
-						}
-					]
-				}
-			]
-		};
+		movies[details.id] = details;
 
 		try {
 			const proposalApi = new ProposalApi(
@@ -89,7 +68,6 @@
 				sessionId: session.id,
 				comment: null
 			});
-
 			const voteApi = new VoteApi(
 				new Configuration({
 					basePath: 'https://pick-a-movie-api.anto.pt/v1'
@@ -98,8 +76,13 @@
 			await voteApi.votesPost({
 				id: proposal.data.id
 			});
+
+			session = {
+				...session,
+				proposals: [...session.proposals, proposal.data]
+			};
 		} catch (err) {
-			session = currentSession;
+			console.error(err);
 		}
 	}
 </script>

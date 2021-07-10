@@ -24,6 +24,7 @@
     "@types/cookie": "^0.4.0",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
+    "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
@@ -45,6 +46,7 @@
   "dependencies": {
     "@fontsource/fira-mono": "^4.2.2",
     "@lukeed/uuid": "^2.0.0",
+    "@sveltestack/svelte-query": "^1.4.1",
     "cookie": "^0.4.1"
   }
 }

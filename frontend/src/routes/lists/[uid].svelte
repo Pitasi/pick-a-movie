@@ -1,13 +1,18 @@
 <script context="module" lang="ts">
 	import type { Load } from '@sveltejs/kit';
-	import type { List } from './api/[uid].json';
+	import type { Session } from '../../connectors';
+	import { Configuration, ProposalApi, SessionApi } from '../../connectors';
 
 	type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>;
 
-	async function getList(fetch: Fetch, id: string): Promise<List> {
-		const res = await fetch(`/lists/api/${id}.json`);
-		const data = await res.json();
-		return data;
+	async function getSession(id: string): Promise<Session> {
+		const api = new SessionApi(
+			new Configuration({
+				basePath: 'https://pick-a-movie-api.anto.pt/v1'
+			})
+		);
+		const res = await api.sessionsIdGet(id);
+		return res.data;
 	}
 
 	async function getMovie(fetch: Fetch, id: string): Promise<MovieDetails> {
@@ -16,78 +21,94 @@
 		return movie;
 	}
 
-	export interface UIList {
-		uid: string;
-		title: string;
-		movies: UIMovie[];
-	}
-
-	export interface UIMovie {
-		details: MovieDetails;
-		votes: number;
-	}
-
 	// see https://kit.svelte.dev/docs#loading
 	export const load: Load = async ({ fetch, page }) => {
 		const uid = page.params['uid'];
-		const list = await getList(fetch, uid);
-		const movies = await Promise.all(
-			list.items.map(async (item) => ({
-				details: await getMovie(fetch, item.movieId),
-				votes: item.votes
-			}))
+		const session = await getSession(uid);
+
+		const movies = {};
+		await Promise.all(
+			session.proposals.map(async ({ movieId }) => {
+				const res = await fetch(`/movies/${movieId}.json`);
+				const data = await res.json();
+				movies[movieId] = data;
+			})
 		);
-		const uiList: UIList = {
-			uid,
-			title: list.title,
-			movies
-		};
+
 		return {
-			props: { list: uiList }
+			props: { session, movies }
 		};
 	};
 </script>
 
 <script lang="ts">
 	import type { MovieDetails } from '../movies/_api';
-	import MovieCard from '$lib/MovieCard/index.svelte';
+	import Proposal from '$lib/Proposal/index.svelte';
 	import Searchbox from '$lib/Searchbox/index.svelte';
+	import { VoteApi } from '../../connectors';
 
-	export let list: UIList;
+	export let session: Session;
+	export let movies: { [key: number]: MovieDetails };
 
 	function canAdd(details: MovieDetails): boolean {
-		return !list.movies.find((movie) => movie.details.id == details.id);
+		return !session.proposals.find((p) => p.movieId == details.id);
 	}
 
 	async function onAdd(details: MovieDetails) {
-		const newList = {
-			...list,
-			movies: [...list.movies, { details, votes: 1 }]
+		const currentSession = { ...session };
+		const proposalId = Math.random();
+		session = {
+			...session,
+			proposals: [
+				...session.proposals,
+				{
+					comment: null,
+					createdAt: null,
+					id: proposalId,
+					movieId: details.id,
+					session,
+					sessionId: session.id,
+					votes: [
+						{
+							id: Math.random(),
+							proposalId
+						}
+					]
+				}
+			]
 		};
-		const oldList = list;
-		list = newList;
 
 		try {
-			await fetch(`/lists/api/${list.uid}.json`, {
-				method: 'put',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					movieId: details.id
+			const proposalApi = new ProposalApi(
+				new Configuration({
+					basePath: 'https://pick-a-movie-api.anto.pt/v1'
 				})
+			);
+			const proposal = await proposalApi.proposalsPost({
+				movieId: details.id,
+				sessionId: session.id,
+				comment: null
+			});
+
+			const voteApi = new VoteApi(
+				new Configuration({
+					basePath: 'https://pick-a-movie-api.anto.pt/v1'
+				})
+			);
+			await voteApi.votesPost({
+				id: proposal.data.id
 			});
 		} catch (err) {
-			list = oldList;
+			session = currentSession;
 		}
 	}
 </script>
 
 <svelte:head>
-	<title>{list.title} - pick a movie</title>
+	<title>{session.title} - pick a movie</title>
 </svelte:head>
 
-{#if list}
+{#if session}
 	<div class="flex" flex="col" gap="8">
 		<div
 			class="flex bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
@@ -95,13 +116,14 @@
 			flex="col"
 			gap="4"
 		>
-			<h1 font="bold" text="white 4xl">{list.title}</h1>
+			<h1 font="bold" text="white 4xl">{session.title || 'Untitled awesomeness'}</h1>
 			<Searchbox {canAdd} {onAdd} />
 		</div>
 		<div class="grid" grid="cols-1 sm:cols-2 md:cols-3 lg:cols-4" justify="items-center" gap="y-12">
-			{#each list.movies as movie (movie.details.id)}
-				<MovieCard
-					details={movie.details}
+			{#each session.proposals as proposal (proposal.id)}
+				<Proposal
+					{movies}
+					{proposal}
 					on:addFavorite={() => {
 						console.log('added');
 					}}

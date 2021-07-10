@@ -5,6 +5,7 @@
 		// @ts-ignore
 		import('virtual:windi-devtools');
 	}
+	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
 
 	import Header from '$lib/Header/index.svelte';
 	import Skeleton from '$lib/Skeletons/index.svelte';
@@ -20,6 +21,8 @@
 
 	let currentNavigating: Navigating;
 	navigating.subscribe((val) => (currentNavigating = val));
+
+	const queryClient = new QueryClient();
 </script>
 
 <aside class="w-full">
@@ -30,7 +33,9 @@
 	{#if $navigating && $delayedNavigating}
 		<Skeleton page={currentNavigating.to} />
 	{:else}
-		<slot />
+		<QueryClientProvider client={queryClient}>
+			<slot />
+		</QueryClientProvider>
 	{/if}
 </main>
 

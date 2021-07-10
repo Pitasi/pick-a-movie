@@ -1,44 +1,26 @@
 import type { RequestHandler } from '@sveltejs/kit';
 
-export interface List {
-    title: string;
-    items: ListItem[];
+export interface Session {
+    createdAt: string,
+    endAt:string,
+    id: number,
+    proposals: Proposal[],
+    startAt: string,
+    updatedAt: string,
 }
 
-export interface ListItem {
-    movieId: string;
-    votes: number;
+export interface Proposal { 
+    boh: number;
 }
 
-const db: { [key: string]: List } = {
-    1: {
-        title: 'a list',
-        items: [
-            { movieId: "337404", votes: 1 },
-            { movieId: "423108", votes: 2 },
-            { movieId: "238", votes: 1 },
-            { movieId: "372058", votes: 1 },
-            { movieId: "496243", votes: 1 },
-        ],
-    },
-    2: {
-        title: 'a nice list',
-        items: [],
-    },
-}
-
-export const get: RequestHandler<List> = async (request) => {
-    const uid = request.params['uid'];
-    if (!db[uid]) {
-        return {
-            status: 404,
-            body: { 'error': 'not found' },
-        };
-    }
-
+export const get: RequestHandler<Session> = async (request) => {
+    const id = request.params['uid'];
+    const backend = 'https://pick-a-movie-api.anto.pt/v1';
+    const res = await fetch(`${backend}/sessions/${id}`);
+    const data = await res.json();
 	return {
         status: 200,
-        body: JSON.stringify(db[uid]),
+        body: JSON.stringify(data),
         headers: {
             'content-type': 'application/json'
         },
@@ -50,27 +32,6 @@ interface AddMovieRequest {
 }
 
 export const put: RequestHandler<Record<string, any>, AddMovieRequest> = async (request) => {
-    const uid = request.params['uid'];
-    if (!db[uid]) {
-        return {
-            status: 404,
-            body: { 'error': 'not found' },
-        };
-    }
-
-    const movieId = request.body.movieId;
-
-    if (db[uid].items.some(i => i.movieId == movieId)) {
-        return {
-            status: 409,
-        }
-    }
-
-    db[uid].items.push({
-        movieId,
-        votes: 1,
-    });
-
     return {
         status: 204,
     }

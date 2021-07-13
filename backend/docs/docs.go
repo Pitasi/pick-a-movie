@@ -410,6 +410,9 @@ var doc = `{
                 },
                 "startAt": {
                     "type": "string"
+                },
+                "title": {
+                    "type": "string"
                 }
             }
         },
@@ -488,6 +491,10 @@ var doc = `{
                 "startAt": {
                     "type": "string",
                     "example": "2011-10-05T14:48:00.000Z"
+                },
+                "title": {
+                    "type": "string",
+                    "example": "a beautiful title"
                 },
                 "updatedAt": {
                     "type": "string"

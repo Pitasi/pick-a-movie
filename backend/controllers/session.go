@@ -97,6 +97,7 @@ func createSession(dm *lib.DBManager) http.HandlerFunc {
 			StartAt:   rq.StartAt,
 			EndAt:     rq.EndAt,
 			Proposals: []*models.Proposal{},
+			Title:     rq.Title,
 		}
 
 		_, err = dm.DB.Model(item).Insert()

@@ -25,20 +25,22 @@
 	const queryClient = new QueryClient();
 </script>
 
-<aside class="w-full">
-	<Header />
-</aside>
+<div class="flex" flex="col" h="min-screen">
+	<aside class="w-full">
+		<Header />
+	</aside>
 
-<main role="main" class="w-full">
-	{#if $navigating && $delayedNavigating}
-		<Skeleton page={currentNavigating.to} />
-	{:else}
-		<QueryClientProvider client={queryClient}>
-			<slot />
-		</QueryClientProvider>
-	{/if}
-</main>
+	<main role="main" w="full" flex="1">
+		{#if $navigating && $delayedNavigating}
+			<Skeleton page={currentNavigating.to} />
+		{:else}
+			<QueryClientProvider client={queryClient}>
+				<slot />
+			</QueryClientProvider>
+		{/if}
+	</main>
 
-<footer text="center" bg="pink-100">
-	<a text="pink-600" href="https://anto.pt">anto.pt</a>
-</footer>
+	<footer text="center" bg="pink-100">
+		<a text="pink-600" href="https://anto.pt">anto.pt</a>
+	</footer>
+</div>

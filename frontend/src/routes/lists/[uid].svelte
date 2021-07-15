@@ -28,7 +28,7 @@
 
 		const movies = {};
 		await Promise.all(
-			session.proposals.map((p) => async () => {
+			session.proposals.map(async (p) => {
 				const res = await fetch(`/movies/${p.movieId}.json`);
 				movies[p.movieId] = await res.json();
 			})
@@ -47,7 +47,7 @@
 	import { VoteApi } from '../../connectors';
 
 	export let session: Session;
-	export let movies: { [id: string]: MovieDetails };
+	export let movies: { [id: number]: MovieDetails };
 
 	function canAdd(details: MovieDetails): boolean {
 		return !session.proposals.find((p) => p.movieId == details.id);

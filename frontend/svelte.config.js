@@ -15,6 +15,9 @@ const config = {
 		adapter: vercel(),
 
 		vite: () => ({
+			optimizeDeps: {
+				include: ['broadcast-channel']
+			},
 			plugins: [
 				WindiCSS.default(),
 			]

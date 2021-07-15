@@ -4,7 +4,6 @@
 
 	export let results: MovieDetails[];
 	export let canAdd;
-	export let onAdd;
 	export let topPosition;
 </script>
 
@@ -19,6 +18,6 @@
 	p="4"
 >
 	{#each results as result (result.id)}
-		<Result details={result} {canAdd} {onAdd} />
+		<Result details={result} {canAdd} on:selected />
 	{/each}
 </div>

@@ -1,14 +1,19 @@
 <script lang="ts">
 	import type { MovieDetails } from 'src/routes/movies/_api';
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
 
 	export let details: MovieDetails;
-	export let onAdd;
 	export let canAdd;
 
 	let enabled = canAdd(details);
 
 	function onClick() {
-		onAdd(details);
+		if (!enabled) {
+			return;
+		}
+
+		dispatch('selected', details);
 	}
 </script>
 
@@ -16,7 +21,7 @@
 	class="flex flex-row items-center gap-4"
 	cursor="pointer"
 	style={`opacity:${enabled ? 1 : 0.5}`}
-	on:click={enabled && onClick}
+	on:click|preventDefault={onClick}
 >
 	<img
 		width="32"

@@ -28,10 +28,9 @@
 
 		const movies = {};
 		await Promise.all(
-			session.proposals.map(async ({ movieId }) => {
-				const res = await fetch(`/movies/${movieId}.json`);
-				const data = await res.json();
-				movies[movieId] = data;
+			session.proposals.map((p) => async () => {
+				const res = await fetch(`/movies/${p.movieId}.json`);
+				movies[p.movieId] = await res.json();
 			})
 		);
 
@@ -48,14 +47,14 @@
 	import { VoteApi } from '../../connectors';
 
 	export let session: Session;
-	export let movies: { [key: number]: MovieDetails };
+	export let movies: { [id: string]: MovieDetails };
 
 	function canAdd(details: MovieDetails): boolean {
 		return !session.proposals.find((p) => p.movieId == details.id);
 	}
 
-	async function onAdd(details: MovieDetails) {
-		movies[details.id] = details;
+	async function onAdd(e: CustomEvent<MovieDetails>) {
+		movies[e.detail.id] = e.detail;
 
 		try {
 			const proposalApi = new ProposalApi(
@@ -64,7 +63,7 @@
 				})
 			);
 			const proposal = await proposalApi.proposalsPost({
-				movieId: details.id,
+				movieId: e.detail.id,
 				sessionId: session.id,
 				comment: null
 			});
@@ -100,13 +99,13 @@
 			gap="4"
 		>
 			<h1 font="bold" text="white 4xl">{session.title || 'Untitled awesomeness'}</h1>
-			<Searchbox {canAdd} {onAdd} />
+			<Searchbox {canAdd} on:selected={onAdd} />
 		</div>
 		<div class="grid" grid="cols-1 sm:cols-2 md:cols-3 lg:cols-4" justify="items-center" gap="y-12">
 			{#each session.proposals as proposal (proposal.id)}
 				<Proposal
-					{movies}
 					{proposal}
+					movie={movies[proposal.movieId]}
 					on:addFavorite={() => {
 						console.log('added');
 					}}

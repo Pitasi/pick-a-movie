@@ -5,9 +5,8 @@
 	import type { MovieDetails } from 'src/routes/movies/_api';
 	import ResultList from './result-list.svelte';
 	import Loading from './loading.svelte';
-
-	type OnAddFunction = (d: MovieDetails) => void;
-	export let onAdd: OnAddFunction = () => {};
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
 
 	type CanAddFunction = (d: MovieDetails) => boolean;
 	export let canAdd: CanAddFunction = () => true;
@@ -34,9 +33,9 @@
 		}
 	);
 
-	const clearBoxOnAdd: OnAddFunction = (details) => {
+	const onSelected = (e: CustomEvent<MovieDetails>) => {
 		$query = null;
-		return onAdd(details);
+		dispatch('selected', e.detail);
 	};
 
 	const searchBoxEl = writable(null);
@@ -72,7 +71,7 @@
 {#if $debouncedQuery}
 	{#await $resultsPromise then results}
 		{#if results?.length}
-			<ResultList {results} {canAdd} onAdd={clearBoxOnAdd} topPosition={resultsTopPos} />
+			<ResultList {results} {canAdd} on:selected={onSelected} topPosition={resultsTopPos} />
 		{/if}
 	{/await}
 {/if}

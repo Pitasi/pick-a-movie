@@ -113,7 +113,7 @@
 			{#each session.proposals as proposal (proposal.id)}
 				<MovieCard
 					details={movies[proposal.movieId]}
-					favoriteCount={proposal.votes?.length || 0}
+					favoriteCount={proposal.votes?.length || 1}
 					isFavorite={browser && !!localStorage.getItem(proposal.id.toString())}
 					on:removeFavorite={async () => {
 						if (!browser) {

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { MovieDetails } from 'src/routes/movies/_api';
+	import { fade } from 'svelte/transition';
 	import Result from './result.svelte';
 
 	export let results: MovieDetails[];
@@ -8,6 +9,8 @@
 </script>
 
 <div
+	in:fade={{ duration: 250 }}
+	out:fade={{ duration: 100 }}
 	class="flex backdrop-filter backdrop-blur-md"
 	flex="col"
 	gap="12"

@@ -24,7 +24,7 @@
 	};
 </script>
 
-<article in:fade w="220px" class="flex" flex="col shrink-0" gap="4">
+<article in:fade={{ duration: 250 }} w="220px" class="flex" flex="col shrink-0" gap="4">
 	<MoviePoster src={posterPath} alt={details.title} />
 	<MovieDetails
 		title={details.title}

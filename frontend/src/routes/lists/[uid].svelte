@@ -73,9 +73,10 @@
 					basePath: 'https://pick-a-movie-api.anto.pt/v1'
 				})
 			);
-			await voteApi.votesPost({
+			const voteRes = await voteApi.votesPost({
 				id: proposal.data.id
 			});
+			localStorage.setItem(proposal.data.id.toString(), JSON.stringify(voteRes.data));
 
 			session = {
 				...session,

@@ -3,6 +3,8 @@
 	import { fade } from 'svelte/transition';
 	import MoviePoster from '$lib/MoviePoster/MoviePoster.svelte';
 	import MovieDetails from '$lib/MovieDetails/MovieDetails.svelte';
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
 
 	export let details: APIMovieDetails;
 	export let favoriteCount: number = 0;
@@ -13,10 +15,12 @@
 
 	const onAddFavorite = async () => {
 		favoriteCount++;
+		dispatch('addFavorite');
 	};
 
 	const onRemoveFavorite = async () => {
 		favoriteCount--;
+		dispatch('removeFavorite');
 	};
 </script>
 

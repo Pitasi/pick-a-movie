@@ -2,6 +2,7 @@
 	import type { Load } from '@sveltejs/kit';
 	import type { Session } from '../../connectors';
 	import { Configuration, ProposalApi, SessionApi } from '../../connectors';
+	import { browser } from '$app/env';
 
 	type Fetch = (info: RequestInfo, init?: RequestInit) => Promise<Response>;
 
@@ -42,7 +43,7 @@
 
 <script lang="ts">
 	import type { MovieDetails } from '../movies/_api';
-	import Proposal from '$lib/Proposal/index.svelte';
+	import MovieCard from '$lib/MovieCard/index.svelte';
 	import Searchbox from '$lib/Searchbox/index.svelte';
 	import { VoteApi } from '../../connectors';
 
@@ -84,6 +85,12 @@
 			console.error(err);
 		}
 	}
+
+	const voteApi = new VoteApi(
+		new Configuration({
+			basePath: 'https://pick-a-movie-api.anto.pt/v1'
+		})
+	);
 </script>
 
 <svelte:head>
@@ -103,11 +110,25 @@
 		</div>
 		<div class="grid" grid="cols-1 sm:cols-2 md:cols-3 lg:cols-4" justify="items-center" gap="y-12">
 			{#each session.proposals as proposal (proposal.id)}
-				<Proposal
-					{proposal}
-					movie={movies[proposal.movieId]}
-					on:addFavorite={() => {
-						console.log('added');
+				<MovieCard
+					details={movies[proposal.movieId]}
+					favoriteCount={proposal.votes?.length || 0}
+					isFavorite={browser && !!localStorage.getItem(proposal.id.toString())}
+					on:removeFavorite={async () => {
+						if (!browser) {
+							return;
+						}
+						// TODO: call vote api and remove the vote
+						localStorage.removeItem(proposal.id.toString());
+					}}
+					on:addFavorite={async () => {
+						if (!browser) {
+							return;
+						}
+						const voteRes = await voteApi.votesPost({
+							id: proposal.id
+						});
+						localStorage.setItem(proposal.id.toString(), JSON.stringify(voteRes.data));
 					}}
 				/>
 			{/each}

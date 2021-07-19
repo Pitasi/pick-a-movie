@@ -25,7 +25,7 @@
 	const queryClient = new QueryClient();
 </script>
 
-<div class="flex" flex="col" h="min-screen">
+<div class="flex" flex="col" h="min-screen" items="center" max="w-5xl" m="auto">
 	<aside class="w-full">
 		<Header />
 	</aside>

@@ -11,10 +11,9 @@
 	class="flex backdrop-filter backdrop-blur-md"
 	flex="col"
 	gap="12"
-	pos="absolute left-0"
-	w="full"
+	pos="absolute"
 	bg="white opacity-70"
-	style={`top: ${$topPosition}px`}
+	style="top: {$topPosition}px"
 	p="4"
 >
 	{#each results as result (result.id)}

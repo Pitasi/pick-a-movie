@@ -340,15 +340,6 @@ var doc = `{
                 "summary": "Delete a vote",
                 "parameters": [
                     {
-                        "description": "Request Body",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/CreateVoteRequest"
-                        }
-                    },
-                    {
                         "type": "string",
                         "description": "Vote ID",
                         "name": "id",
@@ -357,7 +348,7 @@ var doc = `{
                     }
                 ],
                 "responses": {
-                    "204": {
+                    "200": {
                         "description": ""
                     },
                     "400": {

@@ -1,11 +1,12 @@
 FROM golang:1.16-alpine as build
 WORKDIR /src
 
+COPY go.mod go.sum ./
+RUN go mod download
+RUN go get -u github.com/swaggo/swag/cmd/swag
+
 COPY . .
 
-RUN go mod download
-
-RUN go get -u github.com/swaggo/swag/cmd/swag
 RUN swag init
 
 RUN go build -o ./backend

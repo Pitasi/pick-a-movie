@@ -49,7 +49,7 @@ func getSession(dm *lib.DBManager) http.HandlerFunc {
 		}
 
 		var item models.Session
-		err = dm.DB.Model(&item).Where("id = ?0", id).Relation("Proposals").Select()
+		err = dm.DB.Model(&item).Where("id = ?0", id).Relation("Proposals").Relation("Proposals.Votes").Select()
 
 		if item.Proposals == nil {
 			item.Proposals = []*models.Proposal{}
@@ -94,8 +94,9 @@ func createSession(dm *lib.DBManager) http.HandlerFunc {
 		}
 
 		item := &models.Session{
-			StartAt: rq.StartAt,
-			EndAt:   rq.EndAt,
+			StartAt:   rq.StartAt,
+			EndAt:     rq.EndAt,
+			Proposals: []*models.Proposal{},
 		}
 
 		_, err = dm.DB.Model(item).Insert()

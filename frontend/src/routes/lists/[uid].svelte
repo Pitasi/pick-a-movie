@@ -119,7 +119,8 @@
 						if (!browser) {
 							return;
 						}
-						// TODO: call vote api and remove the vote
+						const vote = JSON.parse(localStorage.getItem(proposal.id.toString()));
+						await voteApi.votesIdDelete(vote.id);
 						localStorage.removeItem(proposal.id.toString());
 					}}
 					on:addFavorite={async () => {

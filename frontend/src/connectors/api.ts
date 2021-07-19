@@ -13,7 +13,7 @@
  */
 
 
-import type { Configuration } from './configuration';
+import { Configuration } from './configuration';
 import globalAxios, { AxiosPromise, AxiosInstance } from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -683,6 +683,40 @@ export class SessionApi extends BaseAPI {
 export const VoteApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * delete vote
+         * @summary Delete a vote
+         * @param {string} id Vote ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        votesIdDelete: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('votesIdDelete', 'id', id)
+            const localVarPath = `/votes/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * create vote
          * @summary Create a new vote
          * @param {CreateVoteRequest} request Request Body
@@ -729,6 +763,17 @@ export const VoteApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = VoteApiAxiosParamCreator(configuration)
     return {
         /**
+         * delete vote
+         * @summary Delete a vote
+         * @param {string} id Vote ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async votesIdDelete(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.votesIdDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * create vote
          * @summary Create a new vote
          * @param {CreateVoteRequest} request Request Body
@@ -750,6 +795,16 @@ export const VoteApiFactory = function (configuration?: Configuration, basePath?
     const localVarFp = VoteApiFp(configuration)
     return {
         /**
+         * delete vote
+         * @summary Delete a vote
+         * @param {string} id Vote ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        votesIdDelete(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.votesIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * create vote
          * @summary Create a new vote
          * @param {CreateVoteRequest} request Request Body
@@ -769,6 +824,18 @@ export const VoteApiFactory = function (configuration?: Configuration, basePath?
  * @extends {BaseAPI}
  */
 export class VoteApi extends BaseAPI {
+    /**
+     * delete vote
+     * @summary Delete a vote
+     * @param {string} id Vote ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VoteApi
+     */
+    public votesIdDelete(id: string, options?: any) {
+        return VoteApiFp(this.configuration).votesIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * create vote
      * @summary Create a new vote

@@ -81,7 +81,6 @@ func createVote(dm *lib.DBManager) http.HandlerFunc {
 // @summary Delete a vote
 // @description delete vote
 // @accept  json
-// @param	request body models.CreateVoteRequest true "Request Body"
 // @param id path string true "Vote ID"
 // @tags Vote
 // @success 200

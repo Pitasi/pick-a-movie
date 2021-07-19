@@ -82,6 +82,8 @@
 				...session,
 				proposals: [...session.proposals, proposal.data]
 			};
+
+			window.scrollTo(0, document.body.scrollHeight);
 		} catch (err) {
 			console.error(err);
 		}

@@ -18,6 +18,8 @@ definitions:
         type: string
       startAt:
         type: string
+      title:
+        type: string
     required:
     - endAt
     - startAt
@@ -69,6 +71,9 @@ definitions:
         type: array
       startAt:
         example: "2011-10-05T14:48:00.000Z"
+        type: string
+      title:
+        example: a beautiful title
         type: string
       updatedAt:
         type: string

@@ -9,7 +9,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import Vue from 'vue'
+
+export default Vue.extend({
   props: ['proposal'],
   data() {
     return {
@@ -21,5 +23,5 @@ export default {
       `/tmdb/3/movie/${this.proposal.movieId}`
     )
   },
-}
+})
 </script>

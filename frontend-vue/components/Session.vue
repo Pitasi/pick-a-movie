@@ -11,8 +11,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
   props: ['listId'],
   data() {
     return {
@@ -28,5 +30,5 @@ export default {
   async fetch() {
     this.session = await this.$axios.$get(`/api/v1/sessions/${this.listId}`)
   },
-}
+})
 </script>

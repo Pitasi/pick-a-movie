@@ -3,7 +3,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import Vue from 'vue'
+
+export default Vue.extend({
   props: ['path', 'alt'],
   data() {
     return {
@@ -12,5 +14,5 @@ export default {
         : 'https://via.placeholder.com/220x330.png?text=%20',
     }
   },
-}
+})
 </script>

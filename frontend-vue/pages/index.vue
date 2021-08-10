@@ -1,7 +1,6 @@
 <template>
   <div>
-    <NuxtLogo />
-    <NuxtLink to="/list"> clicca qui </NuxtLink>
+    <NuxtLink to="/list/2" class="text-blue-600">clicca qui per aprire una lista d'esempio</NuxtLink>
   </div>
 </template>
 

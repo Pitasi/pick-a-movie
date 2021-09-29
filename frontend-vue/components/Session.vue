@@ -2,12 +2,12 @@
   <p v-if="$fetchState.pending">Fetching session...</p>
   <p v-else-if="$fetchState.error">An error occurred :(</p>
   <div v-else>
-    <h1>{{ session.title }} ({{ session.movies.length }} movies)</h1>
-    <!-- <Proposal
+    <h1>{{ session.title }} ({{ session.proposals.length }} movies)</h1>
+    <Proposal
       v-for="proposal in session.proposals"
       :key="proposal.id"
       :proposal="proposal"
-    /> -->
+    />
   </div>
 </template>
 

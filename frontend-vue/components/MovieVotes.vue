@@ -4,39 +4,44 @@
     <span v-else>{{ count }} votes</span>
 
     <button @click="onVote">
-      {{ localVote ? 'remove the vote' : 'vote this movie' }}
+      {{ hasUserVoted ? 'remove the vote' : 'vote this movie' }}
     </button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { Proposal } from '~/domain/proposal'
+import hasUserVoted from '~/application/hasUserVoted'
+import voteProposal from '~/application/voteProposal'
+import unvoteProposal from '~/application/unvoteProposal'
 
 export default Vue.extend({
-  props: ['proposal'],
+  props: {
+    proposal: {
+      type: Proposal,
+      required: true,
+    }
+  },
   data() {
     return {
-      count: this.proposal.votes.length,
-      localVote:
-        process.browser &&
-        JSON.parse(localStorage.getItem(this.proposal.id) || 'null'),
+      hasUserVoted: false,
+    }
+  },
+  async fetch() {
+    this.hasUserVoted = await hasUserVoted(this.proposal);
+  },
+  computed: {
+    count(): number {
+      return this.proposal.votes;
     }
   },
   methods: {
-    onVote() {
-      if (this.localVote) {
-        const voteId = this.localVote.id
-        this.count--
-        localStorage.removeItem(this.proposal.id)
-        this.localVote = null
-        // do DELETE voteId
+    async onVote() {
+      if (this.hasUserVoted) {
+        await unvoteProposal(this.proposal);
       } else {
-        this.count++
-
-        this.localVote = { id: '-1' }
-        localStorage.setItem(this.proposal.id, JSON.stringify(this.localVote))
-        // this.localVote = await (do POST)
-        localStorage.setItem(this.proposal.id, JSON.stringify(this.localVote))
+        await voteProposal(this.proposal);
       }
     },
   },

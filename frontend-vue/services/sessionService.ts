@@ -1,4 +1,5 @@
 import { SessionService } from "~/application/ports";
+import { Movie } from "~/domain/movie";
 import { Session } from "~/domain/session";
 
 const sessionService: SessionService = {
@@ -9,7 +10,11 @@ const sessionService: SessionService = {
     const mock = new Session(
       id,
       'the titolo',
-      [],
+      [{
+        id: '1',
+        movie: new Movie('3', 'The Dark Knight', undefined),
+        votes: 2
+      }],
     );
 
     return mock;

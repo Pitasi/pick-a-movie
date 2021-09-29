@@ -1,12 +1,12 @@
 export class Movie {
   id: Uid;
   title: string;
-  poster: URL;
+  poster?: URL;
 
   constructor(
     id: Uid,
     title: string,
-    poster: URL,
+    poster?: URL,
   ) {
     this.id = id;
     this.title = title;

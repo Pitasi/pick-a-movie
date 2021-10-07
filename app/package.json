@@ -1,0 +1,11 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+	"core",
+	"nuxt"
+  ],
+  "main": "index.js",
+  "license": "MIT"
+}

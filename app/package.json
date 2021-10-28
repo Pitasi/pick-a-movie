@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-	"core",
-	"nuxt"
+    "core",
+    "nuxt",
+    "web"
   ],
   "main": "index.js",
   "license": "MIT"

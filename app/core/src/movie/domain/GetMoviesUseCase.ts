@@ -1,7 +1,7 @@
 import { MovieRepository } from "./MovieRepository";
 import { Movie } from "./Movie";
 
-export class GetMoviesUseCase {
+export class SearchMoviesUseCase {
 	private movieRepository: MovieRepository;
 
 	constructor(
@@ -11,6 +11,6 @@ export class GetMoviesUseCase {
 	}
 
 	execute(filter: string): Promise<Movie[]> {
-		return this.movieRepository.get(filter);
+		return this.movieRepository.search(filter);
 	}
 }

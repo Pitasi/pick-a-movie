@@ -4,9 +4,9 @@ import { GetSessionByIdUseCase } from "../domain/usecases";
 import { sessionInitialState, SessionState } from "./SessionState";
 
 export class SessionPloc extends Ploc<SessionState> {
-	private readonly getSessionByIdUseCase: GetSessionByIdUseCase;
-
-	constructor(getSessionByIdUseCase: GetSessionByIdUseCase) {
+	constructor(
+		private readonly getSessionByIdUseCase: GetSessionByIdUseCase,
+	) {
 		super(sessionInitialState);
 		this.getSessionByIdUseCase = getSessionByIdUseCase;
 	}

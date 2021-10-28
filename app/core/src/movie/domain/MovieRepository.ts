@@ -1,5 +1,7 @@
-import { Movie } from "./Movie";
+import { Movie, MovieId } from "./Movie";
 
 export interface MovieRepository {
-	get(filter: string): Promise<Movie[]>;
+	getById(id: MovieId): Promise<Movie>;
+
+	search(filter: string): Promise<Movie[]>;
 }

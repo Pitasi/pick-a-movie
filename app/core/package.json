@@ -1,7 +1,8 @@
 {
   "name": "@pick-a-movie/core",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "type": "module",
+  "main": "index.ts",
   "license": "MIT",
   "scripts": {
     "build": "tsc --build"

@@ -1,11 +1,6 @@
 {
   "program": {
     "fileInfos": {
-      "../node_modules/typescript/lib/lib.es6.d.ts": {
-        "version": "721cec59c3fef87aaf480047d821fb758b3ec9482c4129a54631e6e25e432a31",
-        "signature": "721cec59c3fef87aaf480047d821fb758b3ec9482c4129a54631e6e25e432a31",
-        "affectsGlobalScope": false
-      },
       "../node_modules/typescript/lib/lib.es5.d.ts": {
         "version": "b3584bc5798ed422ce2516df360ffa9cf2d80b5eae852867db9ba3743145f895",
         "signature": "b3584bc5798ed422ce2516df360ffa9cf2d80b5eae852867db9ba3743145f895",
@@ -39,6 +34,11 @@
       "../node_modules/typescript/lib/lib.es2020.d.ts": {
         "version": "e21c071ca3e1b4a815d5f04a7475adcaeea5d64367e840dd0154096d705c3940",
         "signature": "e21c071ca3e1b4a815d5f04a7475adcaeea5d64367e840dd0154096d705c3940",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/typescript/lib/lib.esnext.d.ts": {
+        "version": "fc7a21dd3ee27fd0a9ff1c46534efcd9c3cec51a445b479bb326d871c0aa8302",
+        "signature": "fc7a21dd3ee27fd0a9ff1c46534efcd9c3cec51a445b479bb326d871c0aa8302",
         "affectsGlobalScope": false
       },
       "../node_modules/typescript/lib/lib.dom.d.ts": {
@@ -216,6 +216,26 @@
         "signature": "506b80b9951c9381dc5f11897b31fca5e2a65731d96ddefa19687fbc26b23c6e",
         "affectsGlobalScope": true
       },
+      "../node_modules/typescript/lib/lib.esnext.string.d.ts": {
+        "version": "fb4416144c1bf0323ccbc9afb0ab289c07312214e8820ad17d709498c865a3fe",
+        "signature": "fb4416144c1bf0323ccbc9afb0ab289c07312214e8820ad17d709498c865a3fe",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.esnext.promise.d.ts": {
+        "version": "cd6efb9467a8b6338ece2e2855e37765700f2cd061ca54b01b33878cf5c7677e",
+        "signature": "cd6efb9467a8b6338ece2e2855e37765700f2cd061ca54b01b33878cf5c7677e",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.esnext.weakref.d.ts": {
+        "version": "1e61418f41d404e744b6536af9f8c6f6674dd4d54c12335cd0c4f7eded69cf3f",
+        "signature": "1e61418f41d404e744b6536af9f8c6f6674dd4d54c12335cd0c4f7eded69cf3f",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.esnext.full.d.ts": {
+        "version": "d96fa8a56871904776165ceb8e00bd56127e1a017bb2664cae76223b5f815141",
+        "signature": "d96fa8a56871904776165ceb8e00bd56127e1a017bb2664cae76223b5f815141",
+        "affectsGlobalScope": false
+      },
       "./src/common/presentation/Ploc.ts": {
         "version": "7c0b378f7f667fd83510102a1a9a723858dd0aa4fe00e686ae7f7b0f210e73e0",
         "signature": "087401ecb126a92f095a14c9a1db62d12de28c51bed18e900a3f5ecf0194662e",
@@ -232,13 +252,13 @@
         "affectsGlobalScope": false
       },
       "./src/movie/domain/MovieRepository.ts": {
-        "version": "91c7b3418c2b649772a2bafe7c70608497b4b9beab096f94846d47429501bf0c",
-        "signature": "4b7515147ebcd0f4ad13654d220c743754a0804dc78e1546fed2ec9b606a8235",
+        "version": "f6e4685746e3915ebceab0dbcb05f6424fa52ab77e95c3ead265acfedbf399b3",
+        "signature": "32f36e16cb06103a412f75780bc279ccd2c8f28290162b27d1cc97e67819addf",
         "affectsGlobalScope": false
       },
       "./src/movie/domain/GetMoviesUseCase.ts": {
-        "version": "ef0b180906e15e014915c61ae3938213c6cf5cb5fca510e1e60b283d295fcc7e",
-        "signature": "86c0b1a3fa10dbf8c520ba9604e9ccc231af89f037efe061dda3d8db9756d03d",
+        "version": "c2ede23ad5d57c5505d257b1ee52e123eb99eea3981ba186a8e3ba6ae51f3af2",
+        "signature": "6294866115190f58994a1feaebe632b3fa6c5eab03f1c2117ce6b1e07731bb4d",
         "affectsGlobalScope": false
       },
       "./src/movie/domain/index.ts": {
@@ -247,8 +267,8 @@
         "affectsGlobalScope": false
       },
       "./src/movie/data/MovieInMemoryRepository.ts": {
-        "version": "5bb8c580c3bedf39b4392e27e2d7903ec161b34629caa07cbc5ae6592a6d5c03",
-        "signature": "295a647cb49b55aa2e20e63e97c946516bc4331c2955d6e24f4196a936166540",
+        "version": "5f14824b02907e66e3b1c4d13a62fb8f7243f514b1ca5f2ad0974c78e243ec87",
+        "signature": "10ee058233a77c0f8b99d837ddbb844513c0641451822cd852f31b445bbb699d",
         "affectsGlobalScope": false
       },
       "./src/movie/data/index.ts": {
@@ -256,19 +276,19 @@
         "signature": "15a361627c5aba43cbf04d14771d800a723052873a99c42f19ed01e6b045f73c",
         "affectsGlobalScope": false
       },
-      "./src/movie/presentation/MoiesState.ts": {
+      "./src/movie/presentation/MoviesState.ts": {
         "version": "09b624f5c91fe92718b7fa64c332a86dafae658b7d3e09eb8c32bdaddd5b4a17",
         "signature": "9ea0b705b45bc1f6b0ea070c2ba61bbc3be9e143200303967b0c18fd138a5d17",
         "affectsGlobalScope": false
       },
       "./src/movie/presentation/MoviesPloc.ts": {
-        "version": "fc4b7062443f43c7a38b074a7a236aed2f9444005adebee555deb63f8c7f3de4",
-        "signature": "b231831cc053b054b3cad70967ea71f1032f1495edf112c8446137a3ffac3025",
+        "version": "2faf5801afbea6d72ca9304f4c7239bd24f0dc9e5451d0852f76801b6c8f3618",
+        "signature": "d17eb8cc2bd7a55334564e355193b7207d4bddb7d1a0a1c02c9ff292f734b72c",
         "affectsGlobalScope": false
       },
       "./src/movie/presentation/index.ts": {
-        "version": "a889cc72f407c764dead17f46dd00ee619ce3897098ae94157618f7fc8c44078",
-        "signature": "a889cc72f407c764dead17f46dd00ee619ce3897098ae94157618f7fc8c44078",
+        "version": "1762bbc4db7ee616428ec4b9b6520d17a2ecb99532f824d50b96443af4e2f7e2",
+        "signature": "1762bbc4db7ee616428ec4b9b6520d17a2ecb99532f824d50b96443af4e2f7e2",
         "affectsGlobalScope": false
       },
       "./src/movie/index.ts": {
@@ -276,9 +296,14 @@
         "signature": "ce4b8739e1f1e8e36942f72f83bb63f335684aa4625b8c13866c4ab3fb95f634",
         "affectsGlobalScope": false
       },
+      "./src/session/domain/SessionMovie.ts": {
+        "version": "6cd9aefd4132d85e6fa9d0c95b7329e7f0bdd5a5264c1879e1df8d7d750f09b8",
+        "signature": "8bf8034148bb9d3e5d0bdb7b85726bb3a0d59b2bfc061dfe7f599be572ffb574",
+        "affectsGlobalScope": false
+      },
       "./src/session/domain/session.ts": {
-        "version": "fb854cc217947a2c28b03cc36ab0d13401d6a2038e642d19047d80a19e3ea0d0",
-        "signature": "899eaed439be7897c316d8701bedef35ddd44308eedace412abba18b90756569",
+        "version": "3ee525b515fcafd3be81e90998bace378ef05bc2a349e3c522c67c9a93256424",
+        "signature": "9d880341a50cb3f1ddab4255a6798bf0de4279061f9cd8311d96889d0fcfb575",
         "affectsGlobalScope": false
       },
       "./src/session/domain/SessionRepository.ts": {
@@ -287,7 +312,7 @@
         "affectsGlobalScope": false
       },
       "./src/session/data/SessionInMemoryRepository.ts": {
-        "version": "9ccaa4e4b84599fea42b357beb3ffc61c420721edfb7c07143d75b4619e0f821",
+        "version": "cd8bf9f11473bf13a98ddb6d586e4fa90b6bf918710a5c01bf6be6e4c94b02f5",
         "signature": "6c20d2ffdf4cc8253a2ba75e1fde41759d1f2b43ffcd2c68836d0d7de0e2ea8f",
         "affectsGlobalScope": false
       },
@@ -297,13 +322,13 @@
         "affectsGlobalScope": false
       },
       "./src/session/domain/usecases/AddMovieToSessionUseCase.ts": {
-        "version": "6c5be334f4243c4093ffc4cb82cd31a1583ef577a1de8a1c232b5dd1d894ffb7",
+        "version": "089ef4d7fd5ec9144cb813e4864e78a4ca30b9515f519587a500c2eacdfa15c1",
         "signature": "cfba98feec99a105162ee8f6b3dcbd320283a1f638e8d4fedf528d4bcfc96db8",
         "affectsGlobalScope": false
       },
       "./src/session/domain/usecases/GetSessionByIdUseCase.ts": {
-        "version": "d20983433efacef5aeb7a6c7f67f2fe50dfb28e3e4e134959af23914f32d7bbd",
-        "signature": "551a3227d53ac9acfc9c074fdcc109123c0889faaf93548df3346c579c99b8fd",
+        "version": "3421d0cfe4a5c02f7c2ff5e080e59ec755d97b7711977917d5a48a6becf668c3",
+        "signature": "1c81c7b62262d3192864841fa15e087f656c258c4ec9594e25433556f197b3ea",
         "affectsGlobalScope": false
       },
       "./src/session/domain/usecases/index.ts": {
@@ -322,7 +347,7 @@
         "affectsGlobalScope": false
       },
       "./src/session/presentation/SessionPloc.ts": {
-        "version": "8f1177c16369aabee9d9a82f8ed4de3d1cf946982bfdb23aa1593c59cd68dfd8",
+        "version": "892410f72f7024348b3b392484cf03568c871e44c44578c5ce4d49dabff336c3",
         "signature": "2390a75a8fa1d826ee8d5f6a6b4f982936902be8879e29ef1fd3045cd77ed0c3",
         "affectsGlobalScope": false
       },
@@ -337,7 +362,7 @@
         "affectsGlobalScope": false
       },
       "./src/common/dependencies/DependenciesLocator.ts": {
-        "version": "21292fbfeebbe670b6939a46195ec08577f7406fa0ec357cbf5dfe5ba16d7494",
+        "version": "acf3eb6b9a099bd129b34b9871a5458698522210097114f99fa25478a6115c6a",
         "signature": "f298985f109fb71a8dd21fcb60e66a2f2fcce93525c8c306f5ea2d1398896d94",
         "affectsGlobalScope": false
       },
@@ -354,6 +379,56 @@
       "./src/index.ts": {
         "version": "c1316b43dda7a3f196a1c355a0133d1abfec8b839d1052ecf937c2f7c3b0f710",
         "signature": "50790e3562632d23b61463b70f95afbd112664566e8fc1e7997721fcc9b3e6cb",
+        "affectsGlobalScope": false
+      },
+      "./src/vote/domain/vote.ts": {
+        "version": "67dc94612986d97797ec084f4605634641aa01ac765ea3e0422ce4f905e84107",
+        "signature": "f36b12c9ce8bd9c9e3ba9d45b9893593ea9a86b87b53ad34dc0895c24dffa5cd",
+        "affectsGlobalScope": false
+      },
+      "./src/vote/domain/VoteRepository.ts": {
+        "version": "19e0f7430d019c6d4689d492c750e5706db4f834d5ca082ab6594a4adf6bebfa",
+        "signature": "0d419ab8df78c1523fadbd8c10b9cd5f38ff20d33b7320733f30384976d1a4a6",
+        "affectsGlobalScope": false
+      },
+      "./src/vote/domain/index.ts": {
+        "version": "fd6aa18bd65560b54547b1cd5e7f4eb8351d237576d1595d8d48d659044eb919",
+        "signature": "59d9ae4453212cfe865e5648bb58ec3d75661abe3602c46db911d82a4afed9eb",
+        "affectsGlobalScope": false
+      },
+      "./src/vote/data/VoteInMemoryRepository.ts": {
+        "version": "f0317da51c5698d75629f26056210cb6a268b6e015f24e06baf1f5cd0055f56e",
+        "signature": "43b724e4d4591c02e47b729c2c16e27d59e75889bd81ca277eab3babb5b893c1",
+        "affectsGlobalScope": false
+      },
+      "./src/vote/data/index.ts": {
+        "version": "632d88aba22e6155a93a4bc14708f91e236d24d16478da52619078cb92bb3b2b",
+        "signature": "fdaffdd0507e6bde480eb68bca38cefc706d4c8e9c089c60fbe6bff36011d4a2",
+        "affectsGlobalScope": false
+      },
+      "./src/vote/index.ts": {
+        "version": "9d07b3c6b9939b5626560eae0c4b1b5d226347e9eee8b0691f1feb9bbc312d9a",
+        "signature": "3fae0bdd9f79c67f59c623d3a7e32d2f0ac3894db977129b12541b5f0a31093d",
+        "affectsGlobalScope": false
+      },
+      "./src/session/domain/usecases/AddVoteToMovieUseCase.ts": {
+        "version": "b2cbfe40d9e184e1f9477bc762aafd928abded952f5635c4e7f9c3ea3e83ed03",
+        "signature": "4263110d04528207f76d255cac1ba5eba35fd596caa6dc8c3db747cc48f16d37",
+        "affectsGlobalScope": false
+      },
+      "./src/vote/domain/GetVotesBySessionMovieUseCase.ts": {
+        "version": "7bf28d08137c59cad1245639cd7b3408d5ef2f0e928b2c062e25fad4451b8e0f",
+        "signature": "63d4cf9d628c31e6992cf64eeb682c698cbdc2c4ab4cdd857f4385e188e2ea6e",
+        "affectsGlobalScope": false
+      },
+      "./src/vote/presentation/VotesState.ts": {
+        "version": "80480aec6651d0f6551538c39ffaaaa03f56d16651104172340f9358df39c5cd",
+        "signature": "5fd98a013de8d4238581c9debbf5f0a47583f7aae400c0ef7db92aa4b18d1562",
+        "affectsGlobalScope": false
+      },
+      "./src/vote/presentation/VotesPloc.ts": {
+        "version": "730bef2bf49690bb659c1192257b5c1be848611f4831f8e5c88493525f9da4c4",
+        "signature": "d89aa6a5650ecf71627720f21c5f76da3925a5fef1ad84333621733fd85b471f",
         "affectsGlobalScope": false
       },
       "../node_modules/source-map/source-map.d.ts": {
@@ -948,14 +1023,14 @@
       }
     },
     "options": {
-      "outDir": "./build",
+      "outDir": "./dist",
       "rootDir": "./src",
       "composite": true,
       "declaration": true,
       "allowJs": false,
-      "target": 2,
+      "target": 99,
       "sourceMap": true,
-      "module": 1,
+      "module": 99,
       "moduleResolution": 2,
       "esModuleInterop": true,
       "configFilePath": "./tsconfig.json"
@@ -1020,20 +1095,20 @@
         "./src/movie/domain/index.ts",
         "./src/movie/presentation/index.ts"
       ],
-      "./src/movie/presentation/MoiesState.ts": [
-        "../node_modules/@types/node/util.d.ts",
-        "./src/movie/domain/index.ts"
-      ],
       "./src/movie/presentation/MoviesPloc.ts": [
         "../node_modules/@types/node/util.d.ts",
         "./src/common/index.ts",
         "./src/movie/domain/index.ts",
-        "./src/movie/presentation/MoiesState.ts"
+        "./src/movie/presentation/MoviesState.ts"
+      ],
+      "./src/movie/presentation/MoviesState.ts": [
+        "../node_modules/@types/node/util.d.ts",
+        "./src/movie/domain/index.ts"
       ],
       "./src/movie/presentation/index.ts": [
         "../node_modules/@types/node/util.d.ts",
-        "./src/movie/presentation/MoiesState.ts",
-        "./src/movie/presentation/MoviesPloc.ts"
+        "./src/movie/presentation/MoviesPloc.ts",
+        "./src/movie/presentation/MoviesState.ts"
       ],
       "./src/session/data/SessionInMemoryRepository.ts": [
         "../node_modules/@types/node/util.d.ts",
@@ -1043,6 +1118,10 @@
       "./src/session/data/index.ts": [
         "../node_modules/@types/node/util.d.ts",
         "./src/session/data/SessionInMemoryRepository.ts"
+      ],
+      "./src/session/domain/SessionMovie.ts": [
+        "../node_modules/@types/node/util.d.ts",
+        "./src/movie/index.ts"
       ],
       "./src/session/domain/SessionRepository.ts": [
         "../node_modules/@types/node/util.d.ts",
@@ -1056,13 +1135,20 @@
       ],
       "./src/session/domain/session.ts": [
         "../node_modules/@types/node/util.d.ts",
-        "./src/movie/index.ts"
+        "./src/session/domain/SessionMovie.ts"
       ],
       "./src/session/domain/usecases/AddMovieToSessionUseCase.ts": [
         "../node_modules/@types/node/util.d.ts",
         "./src/movie/index.ts",
+        "./src/session/domain/SessionMovie.ts",
         "./src/session/domain/SessionRepository.ts",
         "./src/session/domain/session.ts"
+      ],
+      "./src/session/domain/usecases/AddVoteToMovieUseCase.ts": [
+        "../node_modules/@types/node/util.d.ts",
+        "./src/movie/index.ts",
+        "./src/session/domain/index.ts",
+        "./src/vote/index.ts"
       ],
       "./src/session/domain/usecases/GetSessionByIdUseCase.ts": [
         "../node_modules/@types/node/util.d.ts",
@@ -1095,6 +1181,54 @@
         "../node_modules/@types/node/util.d.ts",
         "./src/session/presentation/SessionPloc.ts",
         "./src/session/presentation/SessionState.ts"
+      ],
+      "./src/vote/data/VoteInMemoryRepository.ts": [
+        "../node_modules/@types/node/util.d.ts",
+        "./src/vote/domain/index.ts"
+      ],
+      "./src/vote/data/index.ts": [
+        "../node_modules/@types/node/util.d.ts",
+        "./src/vote/data/VoteInMemoryRepository.ts"
+      ],
+      "./src/vote/domain/GetVotesBySessionMovieUseCase.ts": [
+        "../node_modules/@types/node/util.d.ts",
+        "./src/movie/index.ts",
+        "./src/session/index.ts",
+        "./src/vote/domain/VoteRepository.ts",
+        "./src/vote/domain/vote.ts"
+      ],
+      "./src/vote/domain/VoteRepository.ts": [
+        "../node_modules/@types/node/util.d.ts",
+        "./src/movie/index.ts",
+        "./src/session/index.ts",
+        "./src/vote/domain/vote.ts"
+      ],
+      "./src/vote/domain/index.ts": [
+        "../node_modules/@types/node/util.d.ts",
+        "./src/vote/domain/VoteRepository.ts",
+        "./src/vote/domain/vote.ts"
+      ],
+      "./src/vote/domain/vote.ts": [
+        "../node_modules/@types/node/util.d.ts",
+        "./src/movie/index.ts",
+        "./src/session/index.ts"
+      ],
+      "./src/vote/index.ts": [
+        "../node_modules/@types/node/util.d.ts",
+        "./src/vote/data/index.ts",
+        "./src/vote/domain/index.ts"
+      ],
+      "./src/vote/presentation/VotesPloc.ts": [
+        "../node_modules/@types/node/util.d.ts",
+        "./src/common/index.ts",
+        "./src/movie/index.ts",
+        "./src/session/index.ts",
+        "./src/vote/domain/GetVotesBySessionMovieUseCase.ts",
+        "./src/vote/presentation/VotesState.ts"
+      ],
+      "./src/vote/presentation/VotesState.ts": [
+        "../node_modules/@types/node/util.d.ts",
+        "./src/vote/domain/index.ts"
       ],
       "../node_modules/@babel/parser/typings/babel-parser.d.ts": [
         "../node_modules/@babel/types/lib/index.d.ts",
@@ -1868,10 +2002,22 @@
       "../node_modules/typescript/lib/lib.es5.d.ts": [
         "../node_modules/@types/node/util.d.ts"
       ],
-      "../node_modules/typescript/lib/lib.es6.d.ts": [
+      "../node_modules/typescript/lib/lib.esnext.d.ts": [
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../node_modules/typescript/lib/lib.esnext.full.d.ts": [
         "../node_modules/@types/node/util.d.ts"
       ],
       "../node_modules/typescript/lib/lib.esnext.intl.d.ts": [
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../node_modules/typescript/lib/lib.esnext.promise.d.ts": [
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../node_modules/typescript/lib/lib.esnext.string.d.ts": [
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../node_modules/typescript/lib/lib.esnext.weakref.d.ts": [
         "../node_modules/@types/node/util.d.ts"
       ],
       "../node_modules/typescript/lib/lib.scripthost.d.ts": [
@@ -1924,17 +2070,17 @@
         "./src/movie/domain/index.ts",
         "./src/movie/presentation/index.ts"
       ],
-      "./src/movie/presentation/MoiesState.ts": [
-        "./src/movie/domain/index.ts"
-      ],
       "./src/movie/presentation/MoviesPloc.ts": [
         "./src/common/index.ts",
         "./src/movie/domain/index.ts",
-        "./src/movie/presentation/MoiesState.ts"
+        "./src/movie/presentation/MoviesState.ts"
+      ],
+      "./src/movie/presentation/MoviesState.ts": [
+        "./src/movie/domain/index.ts"
       ],
       "./src/movie/presentation/index.ts": [
-        "./src/movie/presentation/MoiesState.ts",
-        "./src/movie/presentation/MoviesPloc.ts"
+        "./src/movie/presentation/MoviesPloc.ts",
+        "./src/movie/presentation/MoviesState.ts"
       ],
       "./src/session/data/SessionInMemoryRepository.ts": [
         "./src/session/domain/SessionRepository.ts",
@@ -1942,6 +2088,9 @@
       ],
       "./src/session/data/index.ts": [
         "./src/session/data/SessionInMemoryRepository.ts"
+      ],
+      "./src/session/domain/SessionMovie.ts": [
+        "./src/movie/index.ts"
       ],
       "./src/session/domain/SessionRepository.ts": [
         "./src/session/domain/session.ts"
@@ -1952,12 +2101,17 @@
         "./src/session/domain/usecases/index.ts"
       ],
       "./src/session/domain/session.ts": [
-        "./src/movie/index.ts"
+        "./src/session/domain/SessionMovie.ts"
       ],
       "./src/session/domain/usecases/AddMovieToSessionUseCase.ts": [
         "./src/movie/index.ts",
         "./src/session/domain/SessionRepository.ts",
         "./src/session/domain/session.ts"
+      ],
+      "./src/session/domain/usecases/AddVoteToMovieUseCase.ts": [
+        "./src/movie/index.ts",
+        "./src/session/domain/index.ts",
+        "./src/vote/index.ts"
       ],
       "./src/session/domain/usecases/GetSessionByIdUseCase.ts": [
         "./src/session/domain/SessionRepository.ts",
@@ -1984,6 +2138,45 @@
       "./src/session/presentation/index.ts": [
         "./src/session/presentation/SessionPloc.ts",
         "./src/session/presentation/SessionState.ts"
+      ],
+      "./src/vote/data/VoteInMemoryRepository.ts": [
+        "./src/vote/domain/index.ts"
+      ],
+      "./src/vote/data/index.ts": [
+        "./src/vote/data/VoteInMemoryRepository.ts"
+      ],
+      "./src/vote/domain/GetVotesBySessionMovieUseCase.ts": [
+        "./src/movie/index.ts",
+        "./src/session/index.ts",
+        "./src/vote/domain/VoteRepository.ts",
+        "./src/vote/domain/vote.ts"
+      ],
+      "./src/vote/domain/VoteRepository.ts": [
+        "./src/movie/index.ts",
+        "./src/session/index.ts",
+        "./src/vote/domain/vote.ts"
+      ],
+      "./src/vote/domain/index.ts": [
+        "./src/vote/domain/VoteRepository.ts",
+        "./src/vote/domain/vote.ts"
+      ],
+      "./src/vote/domain/vote.ts": [
+        "./src/movie/index.ts",
+        "./src/session/index.ts"
+      ],
+      "./src/vote/index.ts": [
+        "./src/vote/data/index.ts",
+        "./src/vote/domain/index.ts"
+      ],
+      "./src/vote/presentation/VotesPloc.ts": [
+        "./src/common/index.ts",
+        "./src/movie/index.ts",
+        "./src/session/index.ts",
+        "./src/vote/domain/GetVotesBySessionMovieUseCase.ts",
+        "./src/vote/presentation/VotesState.ts"
+      ],
+      "./src/vote/presentation/VotesState.ts": [
+        "./src/vote/domain/index.ts"
       ],
       "../node_modules/@babel/parser/typings/babel-parser.d.ts": [
         "../node_modules/@babel/types/lib/index.d.ts",
@@ -2757,10 +2950,22 @@
       "../node_modules/typescript/lib/lib.es5.d.ts": [
         "../node_modules/@types/node/util.d.ts"
       ],
-      "../node_modules/typescript/lib/lib.es6.d.ts": [
+      "../node_modules/typescript/lib/lib.esnext.d.ts": [
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../node_modules/typescript/lib/lib.esnext.full.d.ts": [
         "../node_modules/@types/node/util.d.ts"
       ],
       "../node_modules/typescript/lib/lib.esnext.intl.d.ts": [
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../node_modules/typescript/lib/lib.esnext.promise.d.ts": [
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../node_modules/typescript/lib/lib.esnext.string.d.ts": [
+        "../node_modules/@types/node/util.d.ts"
+      ],
+      "../node_modules/typescript/lib/lib.esnext.weakref.d.ts": [
         "../node_modules/@types/node/util.d.ts"
       ],
       "../node_modules/typescript/lib/lib.scripthost.d.ts": [
@@ -2784,21 +2989,32 @@
       "./src/movie/domain/MovieRepository.ts",
       "./src/movie/domain/index.ts",
       "./src/movie/index.ts",
-      "./src/movie/presentation/MoiesState.ts",
       "./src/movie/presentation/MoviesPloc.ts",
+      "./src/movie/presentation/MoviesState.ts",
       "./src/movie/presentation/index.ts",
       "./src/session/data/SessionInMemoryRepository.ts",
       "./src/session/data/index.ts",
+      "./src/session/domain/SessionMovie.ts",
       "./src/session/domain/SessionRepository.ts",
       "./src/session/domain/index.ts",
       "./src/session/domain/session.ts",
       "./src/session/domain/usecases/AddMovieToSessionUseCase.ts",
+      "./src/session/domain/usecases/AddVoteToMovieUseCase.ts",
       "./src/session/domain/usecases/GetSessionByIdUseCase.ts",
       "./src/session/domain/usecases/index.ts",
       "./src/session/index.ts",
       "./src/session/presentation/SessionPloc.ts",
       "./src/session/presentation/SessionState.ts",
       "./src/session/presentation/index.ts",
+      "./src/vote/data/VoteInMemoryRepository.ts",
+      "./src/vote/data/index.ts",
+      "./src/vote/domain/GetVotesBySessionMovieUseCase.ts",
+      "./src/vote/domain/VoteRepository.ts",
+      "./src/vote/domain/index.ts",
+      "./src/vote/domain/vote.ts",
+      "./src/vote/index.ts",
+      "./src/vote/presentation/VotesPloc.ts",
+      "./src/vote/presentation/VotesState.ts",
       "../node_modules/@babel/parser/typings/babel-parser.d.ts",
       "../node_modules/@babel/types/lib/index.d.ts",
       "../node_modules/@types/autoprefixer/index.d.ts",
@@ -2956,8 +3172,12 @@
       "../node_modules/typescript/lib/lib.es2020.string.d.ts",
       "../node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts",
       "../node_modules/typescript/lib/lib.es5.d.ts",
-      "../node_modules/typescript/lib/lib.es6.d.ts",
+      "../node_modules/typescript/lib/lib.esnext.d.ts",
+      "../node_modules/typescript/lib/lib.esnext.full.d.ts",
       "../node_modules/typescript/lib/lib.esnext.intl.d.ts",
+      "../node_modules/typescript/lib/lib.esnext.promise.d.ts",
+      "../node_modules/typescript/lib/lib.esnext.string.d.ts",
+      "../node_modules/typescript/lib/lib.esnext.weakref.d.ts",
       "../node_modules/typescript/lib/lib.scripthost.d.ts",
       "../node_modules/typescript/lib/lib.webworker.importscripts.d.ts"
     ]

@@ -1,5 +1,6 @@
 import { Movie } from "../../../movie";
 import { Session } from "../session";
+import { SessionMovie } from "../SessionMovie";
 import { SessionRepository } from "../SessionRepository";
 
 export class AddMovieToSessionUseCase {
@@ -10,7 +11,7 @@ export class AddMovieToSessionUseCase {
 	}
 
 	async execute(session: Session, movie: Movie): Promise<void> {
-		const newSession = session.addMovie(movie);
+		const newSession = session.addMovie(new SessionMovie(movie));
 		await this.sessionRepository.save(newSession);
 	}
 }

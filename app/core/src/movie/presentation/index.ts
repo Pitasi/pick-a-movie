@@ -1,2 +1,2 @@
 export * from "./MoviesPloc";
-export * from "./MoiesState";
+export * from "./MoviesState";

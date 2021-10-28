@@ -1,9 +1,9 @@
-import { GetMoviesUseCase, MovieInMemoryRepository, MoviesPloc } from "../../movie";
+import { SearchMoviesUseCase, MovieInMemoryRepository, MoviesPloc } from "../../movie";
 import { GetSessionByIdUseCase, SessionPloc, SessionInMemoryRepository } from "../../session";
 
 function provideMoviesPloc(): MoviesPloc {
 	const movieRepository = new MovieInMemoryRepository();
-	const getMoviesUseCase = new GetMoviesUseCase(movieRepository);
+	const getMoviesUseCase = new SearchMoviesUseCase(movieRepository);
 	const moviesPloc = new MoviesPloc(getMoviesUseCase);
 	return moviesPloc;
 }

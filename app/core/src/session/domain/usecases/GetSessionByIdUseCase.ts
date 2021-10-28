@@ -1,11 +1,10 @@
 import { Session, SessionId } from "../session";
 import { SessionRepository } from "../SessionRepository";
 
-
 export class GetSessionByIdUseCase {
-	readonly sessionRepository: SessionRepository;
-
-	constructor(sessionRepository: SessionRepository) {
+	constructor(
+		private readonly sessionRepository: SessionRepository
+	) {
 		this.sessionRepository = sessionRepository;
 	}
 

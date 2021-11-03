@@ -10,7 +10,7 @@ export class SessionPloc extends Ploc<SessionState> {
 		super(sessionInitialState);
 		this.getSessionByIdUseCase = getSessionByIdUseCase;
 	}
-	
+
 	async load(id: SessionId): Promise<void> {
 		const session = await this.getSessionByIdUseCase.execute(id);
 		this.changeState({

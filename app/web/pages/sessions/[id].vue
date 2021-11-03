@@ -9,20 +9,13 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { dependenciesLocator } from '@pick-a-movie/core';
 import { useRoute } from 'vue-router'
+import { useSession } from '../../composables';
 
 export default defineComponent({
 	setup() {
-		const route = useRoute()
-
-		// useSession(id)
-		const ploc = dependenciesLocator.provideSessionPloc();
-		const state = ref(ploc.state);
-		ploc.subscribe((sessionState) => {
-			state.value = sessionState;
-		});
-		ploc.load(route.params.id as string);
+		const route = useRoute();
+		const state = useSession(route.params.id as string);
 
 		return {
 			id: route.params.id,

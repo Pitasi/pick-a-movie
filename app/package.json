@@ -4,7 +4,6 @@
   "private": true,
   "workspaces": [
     "core",
-    "nuxt",
     "web"
   ],
   "main": "index.js",

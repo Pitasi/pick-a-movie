@@ -1,25 +1,31 @@
 <template>
-	<div v-if="state.kind === 'LoadingSessionState'">
-		<p>Loading session...</p>
-	</div>
-	<div v-else>
-		<p>{{ JSON.stringify(state) }}</p>
+	<div>
+		<div v-if="pending">
+			<p>Loading session...</p>
+		</div>
+		<div v-else>
+			<h1>{{ data.title }}</h1>
+			<div v-for="movie in data.movies" :key="movie.movieId">
+				<p>{{ movie.movieId }}</p>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router'
 import { useSession } from '../../composables';
 
 export default defineComponent({
-	setup() {
+	async setup() {
 		const route = useRoute();
-		const state = useSession(route.params.id as string);
+		const { pending, data } = await useSession(route.params.id as string);
 
 		return {
 			id: route.params.id,
-			state,
+			pending,
+			data,
 		}
 	},
 })

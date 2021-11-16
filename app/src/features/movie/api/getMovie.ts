@@ -4,7 +4,7 @@ import {
 	MovieId,
 	MovieInMemoryRepository,
 } from "@/core";
-import { QueryClient, useQuery, UseQueryResult } from "react-query";
+import { Query } from "@/lib/api/query";
 
 export const getMovie = (id: MovieId): Promise<Movie | undefined> => {
 	const movieRepository = new MovieInMemoryRepository();
@@ -12,17 +12,5 @@ export const getMovie = (id: MovieId): Promise<Movie | undefined> => {
 	return getMovieByIdUseCase.execute(id);
 };
 
-export const useMovie = (id: MovieId): UseQueryResult<Movie | undefined> => {
-	return useQuery({
-		queryKey: ["movie", id],
-		queryFn: () => getMovie(id),
-		staleTime: 30000,
-	});
-};
-
-export const prefetchMovie = (client: QueryClient, id: MovieId) => {
-	return client.prefetchQuery({
-		queryKey: ["movie", id],
-		queryFn: () => getMovie(id),
-	});
-};
+export const MovieQuery = (id: MovieId) =>
+	new Query(["movie", id], () => getMovie(id));

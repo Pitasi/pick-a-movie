@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { SessionMovie } from "@/core/session/domain/SessionMovie";
-import { useMovie } from "../api/getMovie";
-import { useQueryClient } from "react-query";
+import { useResult } from "@/lib/api/query";
+import { MovieQuery } from "../api/getMovie";
 
 const fallbackPath = "";
 
@@ -10,8 +10,7 @@ export interface MovieProps {
 }
 
 export const MovieCard = ({ movie }: MovieProps) => {
-	const d = useMovie(movie.movieId);
-	const queryClient = useQueryClient();
+	const d = useResult(MovieQuery(movie.movieId));
 
 	if (!d.data) {
 		return <div>Loading movie {movie.movieId}...</div>;

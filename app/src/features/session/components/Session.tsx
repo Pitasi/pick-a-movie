@@ -1,16 +1,18 @@
 import { Movie } from "@/core";
-import { useSession } from "../";
 import { useAddMovieMutation } from "../api/useAddMovieMutation";
 import MovieCards from "./MovieCard";
 import Searchbar from "./Searchbar";
+import { useResult } from "@/lib/api/query";
+import React from "react";
+import { SessionQuery } from "..";
 
 export interface SessionProps {
 	id: string;
 }
 
 export const Session = ({ id }: SessionProps) => {
-	const s = useSession(id);
 	const addMovie = useAddMovieMutation();
+	const s = useResult(SessionQuery(id));
 
 	if (!s.data) {
 		return <div>Loading session {id}...</div>;

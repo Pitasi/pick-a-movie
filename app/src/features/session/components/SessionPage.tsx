@@ -1,8 +1,8 @@
 import React from "react";
-import { getSession, prefetchSession, Session } from "@/features/session";
+import { SessionQuery, Session } from "@/features/session";
 import { dehydrate, QueryClient } from "react-query";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { prefetchMovie } from "@/features/movie/api/getMovie";
+import { MovieQuery } from "@/features/movie/api/getMovie";
 
 interface SessionPageProps {
 	id: string;
@@ -20,14 +20,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
 	const id = ctx.params?.id as string;
 
-	// prefetch session object
 	const queryClient = new QueryClient();
-	await prefetchSession(queryClient, id);
+
+	// prefetch session object
+	const q = SessionQuery(id);
+	const session = await q.prefetch(queryClient);
 
 	// prefetch all movies in session
-	const session = await getSession(id);
 	for (const movie of session.movies) {
-		await prefetchMovie(queryClient, movie.movieId);
+		const movieQ = MovieQuery(movie.movieId);
+		await movieQ.prefetch(queryClient);
 	}
 
 	return {

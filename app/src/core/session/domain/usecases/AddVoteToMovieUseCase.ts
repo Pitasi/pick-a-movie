@@ -3,13 +3,11 @@ import { Vote, VoteRepository, VoteSaveRequest } from "../../../vote";
 import { SessionId } from "../../domain";
 
 export class AddVoteToMovieUseCase {
-	constructor(
-		private readonly votesRepository: VoteRepository,
-	) { }
+	constructor(private readonly votesRepository: VoteRepository) {}
 
 	async execute(sessionId: SessionId, movieId: MovieId): Promise<Vote> {
 		const req: VoteSaveRequest = {
-			author: 'me', // TODO: take this from current session
+			author: "me", // TODO: take this from current session
 			sessionId,
 			movieId,
 		};

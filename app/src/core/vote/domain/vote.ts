@@ -4,10 +4,10 @@ import { SessionId } from "../../session";
 export type UserId = string;
 
 export class Vote {
-	constructor (
+	constructor(
 		public sessionId: SessionId,
 		public movieId: MovieId,
 		public author: UserId,
-		public date: Date,
-	) { }
+		public date: Date
+	) {}
 }

@@ -1,2 +1,2 @@
-export * from './GetMoviesUseCase';
-export * from './GetMovieByIdUseCase';
+export * from "./SearchMoviesUseCase";
+export * from "./GetMovieByIdUseCase";

@@ -4,9 +4,7 @@ import { Movie } from "../Movie";
 export class SearchMoviesUseCase {
 	private movieRepository: MovieRepository;
 
-	constructor(
-		movieRepository: MovieRepository,
-	) {
+	constructor(movieRepository: MovieRepository) {
 		this.movieRepository = movieRepository;
 	}
 

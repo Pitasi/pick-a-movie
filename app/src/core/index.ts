@@ -1,3 +1,3 @@
-export * from './movie';
-export * from './session';
-export * from './vote';
+export * from "./movie";
+export * from "./session";
+export * from "./vote";

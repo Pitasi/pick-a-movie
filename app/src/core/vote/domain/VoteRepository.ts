@@ -1,5 +1,5 @@
-import { Movie, MovieId } from "../../movie";
-import { Session, SessionId } from "../../session";
+import { MovieId } from "../../movie";
+import { SessionId } from "../../session";
 import { Vote } from "./vote";
 
 export interface VoteSaveRequest {

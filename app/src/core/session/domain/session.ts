@@ -19,6 +19,6 @@ export class Session {
 	}
 
 	toJSON(): Session {
-		return {...this}
+		return { ...this };
 	}
 }

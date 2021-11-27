@@ -2,6 +2,8 @@ import Image from "next/image";
 import { SessionMovie } from "@/core/session/domain/SessionMovie";
 import { useResult } from "@/lib/api/query";
 import { MovieQuery } from "../api/getMovie";
+import React from "react";
+import { VotesBar } from "@/features/votes";
 
 const fallbackPath = "";
 
@@ -24,13 +26,14 @@ export const MovieCard = ({ movie }: MovieProps) => {
 		<article>
 			<p>{d.data.title}</p>
 			<Image
-				src={d.data?.posterPath || fallbackPath}
+				src={d.data.posterPath || fallbackPath}
 				alt={d.data.title}
 				height={450}
 				width={300}
 				// placeholder={blurDataUrl ? "blur" : undefined}
 				// blurDataURL={blurDataUrl}
 			/>
+			<VotesBar movieId={d.data.id} />
 		</article>
 	);
 };

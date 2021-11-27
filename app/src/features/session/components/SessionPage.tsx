@@ -1,14 +1,16 @@
-import React from "react";
+import React, { FC } from "react";
 import { SessionQuery, Session } from "@/features/session";
 import { dehydrate, QueryClient } from "react-query";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { MovieQuery } from "@/features/movie/api/getMovie";
 
 interface SessionPageProps {
 	id: string;
 }
 
-const SessionPage = ({ id }: SessionPageProps) => <Session id={id} />;
+const SessionPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
+	id,
+}) => <Session id={id} />;
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	return {
@@ -17,7 +19,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	};
 };
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getStaticProps: GetStaticProps<SessionPageProps> = async (ctx) => {
 	const id = ctx.params?.id as string;
 
 	const queryClient = new QueryClient();
@@ -27,8 +29,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 	const session = await q.prefetch(queryClient);
 
 	// prefetch all movies in session
-	for (const movie of session.movies) {
-		const movieQ = MovieQuery(movie.movieId);
+	for (const sessionMovie of session.movies) {
+		const movieQ = MovieQuery(sessionMovie.movieId);
 		await movieQ.prefetch(queryClient);
 	}
 

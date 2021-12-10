@@ -7,17 +7,16 @@ const sessions: SessionDb = {
 	"1": new Session("1", "The first of many", []),
 	"2": new Session("2", "Another one", [
 		{
-			movieId: "1",
+			movieId: "580489",
 		},
 		{
-			movieId: "2",
+			movieId: "634649",
 		},
 	]),
 };
 
 export class SessionInMemoryRepository implements SessionRepository {
 	get(id: SessionId): Promise<Session> {
-		console.log("FETCH", id);
 		return new Promise((resolve) => {
 			setTimeout(() => resolve(sessions[id]), 100);
 		});

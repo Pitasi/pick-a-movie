@@ -14,10 +14,6 @@ export class Session {
 		this.movies = movies;
 	}
 
-	addMovie(movie: SessionMovie): Session {
-		return new Session(this.id, this.title, [...this.movies, movie]);
-	}
-
 	toJSON(): Session {
 		return { ...this };
 	}

@@ -4,10 +4,11 @@ import React, { useState } from "react";
 import Result from "./Result";
 
 export interface SearchbarProps {
+	excludeFilter: (m: Movie) => boolean;
 	onMovieSelected: (movie: Movie) => void;
 }
 
-const Searchbar = ({ onMovieSelected }: SearchbarProps) => {
+const Searchbar = ({ excludeFilter, onMovieSelected }: SearchbarProps) => {
 	const [query, setQuery] = useState("");
 	const resetQuery = () => setQuery("");
 
@@ -38,11 +39,13 @@ const Searchbar = ({ onMovieSelected }: SearchbarProps) => {
 			<div>
 				{res &&
 					res.data?.map((movie) => (
-						<Result
-							key={movie.id}
-							title={movie.title}
-							onClick={() => handleMovieSelected(movie)}
-						/>
+						<div key={movie.id}>
+							<Result
+								title={movie.title}
+								onClick={() => handleMovieSelected(movie)}
+								disabled={excludeFilter(movie)}
+							/>
+						</div>
 					))}
 			</div>
 		</div>

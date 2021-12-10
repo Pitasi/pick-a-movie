@@ -5,6 +5,6 @@ const { withPlaiceholder } = require("@plaiceholder/next");
 module.exports = withPlaiceholder({
 	reactStrictMode: true,
 	images: {
-		domains: ["www.themoviedb.org"],
+		domains: ["image.tmdb.org"],
 	},
 });

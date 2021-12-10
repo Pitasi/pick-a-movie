@@ -1,8 +1,9 @@
-import { Movie, MovieInMemoryRepository, SearchMoviesUseCase } from "@/core";
+import { Movie, SearchMoviesUseCase } from "@/core";
+import { TmdbMovieRepository } from "@/core/movie/data/TmdbMovieRepository";
 import { useQuery, UseQueryResult } from "react-query";
 
 export const searchMovies = (term: string): Promise<Movie[]> => {
-	const movieRepository = new MovieInMemoryRepository();
+	const movieRepository = new TmdbMovieRepository();
 	const searchMoviesUseCase = new SearchMoviesUseCase(movieRepository);
 	return searchMoviesUseCase.execute(term);
 };

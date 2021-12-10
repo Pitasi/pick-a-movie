@@ -26,10 +26,17 @@ export const Session = ({ id }: SessionProps) => {
 		});
 	};
 
+	const excludeFilter = (movie: Movie) => {
+		return s.data.movies.some((m) => m.movieId === movie.id);
+	};
+
 	return (
 		<main>
 			<SessionContext.Provider value={s.data}>
-				<Searchbar onMovieSelected={handleMovieSelected} />
+				<Searchbar
+					excludeFilter={excludeFilter}
+					onMovieSelected={handleMovieSelected}
+				/>
 				<h1>{s.data.title}</h1>
 				<MovieCards movies={s.data.movies} />
 			</SessionContext.Provider>

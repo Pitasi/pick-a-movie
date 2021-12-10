@@ -1,13 +1,9 @@
-import {
-	GetMovieByIdUseCase,
-	Movie,
-	MovieId,
-	MovieInMemoryRepository,
-} from "@/core";
+import { GetMovieByIdUseCase, Movie, MovieId } from "@/core";
+import { TmdbMovieRepository } from "@/core/movie/data/TmdbMovieRepository";
 import { Query } from "@/lib/api/query";
 
 export const getMovie = (id: MovieId): Promise<Movie | undefined> => {
-	const movieRepository = new MovieInMemoryRepository();
+	const movieRepository = new TmdbMovieRepository();
 	const getMovieByIdUseCase = new GetMovieByIdUseCase(movieRepository);
 	return getMovieByIdUseCase.execute(id);
 };

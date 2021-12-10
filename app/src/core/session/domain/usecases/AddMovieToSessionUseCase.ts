@@ -10,8 +10,12 @@ export class AddMovieToSessionUseCase {
 		this.sessionRepository = sessionRepository;
 	}
 
-	async execute(session: Session, movie: Movie): Promise<void> {
-		const newSession = session.addMovie(new SessionMovie(movie));
+	async execute(session: Session, movie: Movie): Promise<Session> {
+		const newSession = new Session(session.id, session.title, [
+			...session.movies,
+			new SessionMovie(movie),
+		]);
 		await this.sessionRepository.save(newSession);
+		return newSession;
 	}
 }

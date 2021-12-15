@@ -12,12 +12,10 @@ export interface TmdbMovie {
 export class TmdbClient {
 	private axios: AxiosInstance;
 
-	constructor(apiKey: string) {
+	constructor() {
 		this.axios = axios.create({
-			baseURL: "https://api.themoviedb.org/3/",
-			headers: {
-				authorization: `Bearer ${apiKey}`,
-			},
+			baseURL:
+				(process.env.VERCEL_URL || "http://localhost:3000") + "/api/tmdb",
 		});
 	}
 
@@ -30,5 +28,10 @@ export class TmdbClient {
 			return null;
 		}
 		return res.data;
+	}
+
+	public async search(query: string): Promise<TmdbMovie[]> {
+		const res = await this.axios.get(`search/movie?query=${query}`);
+		return res.data.results;
 	}
 }

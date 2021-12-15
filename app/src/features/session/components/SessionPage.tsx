@@ -29,9 +29,11 @@ export const getStaticProps: GetStaticProps<SessionPageProps> = async (ctx) => {
 	const session = await q.prefetch(queryClient);
 
 	// prefetch all movies in session
-	for (const sessionMovie of session.movies) {
-		const movieQ = MovieQuery(sessionMovie.movieId);
-		await movieQ.prefetch(queryClient);
+	if (session) {
+		for (const sessionMovie of session.movies) {
+			const movieQ = MovieQuery(sessionMovie.movieId);
+			await movieQ.prefetch(queryClient);
+		}
 	}
 
 	return {

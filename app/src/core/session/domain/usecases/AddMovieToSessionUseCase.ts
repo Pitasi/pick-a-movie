@@ -11,11 +11,12 @@ export class AddMovieToSessionUseCase {
 	}
 
 	async execute(session: Session, movie: Movie): Promise<Session> {
+		const sessionMovie = new SessionMovie(movie);
 		const newSession = new Session(session.id, session.title, [
 			...session.movies,
-			new SessionMovie(movie),
+			sessionMovie,
 		]);
-		await this.sessionRepository.save(newSession);
+		await this.sessionRepository.addMovie(session, sessionMovie);
 		return newSession;
 	}
 }

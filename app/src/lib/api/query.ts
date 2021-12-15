@@ -11,13 +11,16 @@ export class Query<QueryKeyT extends QueryKey, ResultT> {
 
 		await client.prefetchQuery({
 			queryKey: this.queryKey,
-			queryFn: async () => this.fixSerialization(result),
+			queryFn: () => this.fixSerialization(result),
 		});
 
 		return result;
 	}
 
 	private fixSerialization(o: unknown) {
+		if (!o) {
+			return null;
+		}
 		return JSON.parse(JSON.stringify(o));
 	}
 }

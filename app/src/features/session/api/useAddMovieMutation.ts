@@ -1,9 +1,5 @@
-import {
-	AddMovieToSessionUseCase,
-	Movie,
-	Session,
-	SessionInMemoryRepository,
-} from "@/core";
+import { AddMovieToSessionUseCase, Movie, Session } from "@/core";
+import { SessionRestRepository } from "@/core/session/data/SessionRestRepository";
 import { SessionMovie } from "@/core/session/domain/SessionMovie";
 import { useMutation, useQueryClient } from "react-query";
 
@@ -14,7 +10,7 @@ export interface AddMovieMutationParams {
 
 export const useAddMovieMutation = () => {
 	const queryClient = useQueryClient();
-	const sessionRepository = new SessionInMemoryRepository();
+	const sessionRepository = new SessionRestRepository();
 	const addMovieToSessionUseCase = new AddMovieToSessionUseCase(
 		sessionRepository
 	);

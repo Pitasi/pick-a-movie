@@ -6,7 +6,7 @@ export class GetSessionByIdUseCase {
 		this.sessionRepository = sessionRepository;
 	}
 
-	async execute(id: SessionId): Promise<Session> {
+	async execute(id: SessionId): Promise<Session | undefined> {
 		return this.sessionRepository.get(id);
 	}
 }

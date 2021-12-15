@@ -1,4 +1,5 @@
 import { Session, SessionId } from "../domain/session";
+import { SessionMovie } from "../domain/SessionMovie";
 import { SessionRepository } from "../domain/SessionRepository";
 
 type SessionDb = { [key: string]: Session };
@@ -22,7 +23,7 @@ export class SessionInMemoryRepository implements SessionRepository {
 		});
 	}
 
-	save(session: Session): Promise<void> {
+	addMovie(session: Session, sessionMovie: SessionMovie): Promise<void> {
 		sessions[session.id] = session;
 		return new Promise((resolve) => {
 			setTimeout(() => resolve(), 100);

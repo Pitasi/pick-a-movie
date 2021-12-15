@@ -20,14 +20,16 @@ export const Session = ({ id }: SessionProps) => {
 	}
 
 	const handleMovieSelected = (movie: Movie) => {
-		addMovie.mutate({
-			session: s.data,
-			movie,
-		});
+		if (s.data) {
+			addMovie.mutate({
+				session: s.data,
+				movie,
+			});
+		}
 	};
 
 	const excludeFilter = (movie: Movie) => {
-		return s.data.movies.some((m) => m.movieId === movie.id);
+		return s.data ? s.data.movies.some((m) => m.movieId === movie.id) : false;
 	};
 
 	return (

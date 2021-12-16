@@ -21,6 +21,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<SessionPageProps> = async (ctx) => {
 	const id = ctx.params?.id as string;
+	console.log("id", id, ctx.params);
 
 	const queryClient = new QueryClient();
 

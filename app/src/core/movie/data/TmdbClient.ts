@@ -15,7 +15,8 @@ export class TmdbClient {
 	constructor() {
 		this.axios = axios.create({
 			baseURL:
-				(process.env.VERCEL_URL || "http://localhost:3000") + "/api/tmdb",
+				(`https://${process.env.VERCEL_URL}` || "http://localhost:3000") +
+				"/api/tmdb",
 		});
 	}
 

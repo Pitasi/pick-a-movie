@@ -13,7 +13,7 @@ export interface ApiProposal {
 export interface ApiSession {
 	createdAt: string;
 	endAt: string;
-	id: string;
+	id: number;
 	proposals: ApiProposal[];
 	startAt: string;
 	title: string;
@@ -32,7 +32,7 @@ export class SessionRestRepository implements SessionRepository {
 
 		const apiSession = res.data;
 		return new Session(
-			apiSession.id,
+			apiSession.id.toString(),
 			apiSession.title,
 			apiSession.proposals.map((p) => ({ movieId: p.movieId }))
 		);
@@ -40,7 +40,7 @@ export class SessionRestRepository implements SessionRepository {
 
 	async addMovie(session: Session, sessionMovie: SessionMovie): Promise<void> {
 		await axios.post(`${baseURL}/v1/proposals`, {
-			sessionId: session.id,
+			sessionId: parseInt(session.id, 10),
 			movieId: parseInt(sessionMovie.movieId, 10),
 			comment: "",
 		});

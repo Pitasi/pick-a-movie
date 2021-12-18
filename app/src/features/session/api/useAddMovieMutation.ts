@@ -18,7 +18,7 @@ export const useAddMovieMutation = () => {
 	const onMutate = ({ session, movie }: AddMovieMutationParams) => {
 		const optimisticSession = new Session(session.id, session.title, [
 			...session.movies,
-			new SessionMovie(movie, "local"),
+			new SessionMovie(movie, "local-proposal"),
 		]);
 		queryClient.setQueryData<Session>(
 			["session", session.id],
@@ -34,8 +34,8 @@ export const useAddMovieMutation = () => {
 		{
 			onMutate,
 			// Notice the second argument is the variables object that the `mutate` function receives
-			onSuccess: (result, variables) => {
-				queryClient.setQueryData(["session", variables.session.id], result);
+			onSuccess: async (result, variables) => {
+				await queryClient.invalidateQueries(["session", variables.session.id]);
 			},
 			onError: (error, variables, context) => {
 				console.error("couldn't add movie to session", error);

@@ -1,4 +1,3 @@
-import axios, { AxiosInstance } from "axios";
 import { MovieId } from "..";
 
 export interface TmdbMovie {
@@ -10,29 +9,27 @@ export interface TmdbMovie {
 }
 
 export class TmdbClient {
-	private axios: AxiosInstance;
+	private apiURL: string;
 
 	constructor() {
-		this.axios = axios.create({
-			baseURL:
-				(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}` ||
-					"http://localhost:3000") + "/api/tmdb",
-		});
+		const e = process.env.NEXT_PUBLIC_TMDB_API_URL;
+		if (!e) {
+			throw new Error("Missing NEXT_PUBLIC_TMDB_API_URL env variable");
+		}
+		this.apiURL = e.replace(/\/$/g, "");
 	}
 
 	public async getMovie(id: MovieId): Promise<TmdbMovie | null> {
-		const res = await this.axios.get<TmdbMovie>(`movie/${id}`, {
-			validateStatus: (status) =>
-				status === 404 || (status >= 200 && status < 300),
-		});
+		const res = await fetch(`${this.apiURL}/movie/${id}`);
 		if (res.status === 404) {
 			return null;
 		}
-		return res.data;
+		return await res.json();
 	}
 
 	public async search(query: string): Promise<TmdbMovie[]> {
-		const res = await this.axios.get(`search/movie?query=${query}`);
-		return res.data.results;
+		const res = await fetch(`${this.apiURL}/search/movie?query=${query}`);
+		const page = await res.json();
+		return page.results;
 	}
 }

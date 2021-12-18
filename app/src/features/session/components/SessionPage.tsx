@@ -10,7 +10,13 @@ interface SessionPageProps {
 
 const SessionPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
 	id,
-}) => <Session id={id} />;
+}) => {
+	if (!id) {
+		// not sure why sometimes the first rendering has "id" undefined here
+		return null;
+	}
+	return <Session id={id} />;
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	return {
@@ -21,19 +27,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<SessionPageProps> = async (ctx) => {
 	const id = ctx.params?.id as string;
+	if (!id) {
+		return {
+			notFound: true,
+		};
+	}
 
 	const queryClient = new QueryClient();
 
 	// prefetch session object
 	const q = SessionQuery(id);
 	const session = await q.prefetch(queryClient);
+	if (!session) {
+		return {
+			notFound: true,
+		};
+	}
 
 	// prefetch all movies in session
-	if (session) {
-		for (const sessionMovie of session.movies) {
-			const movieQ = MovieQuery(sessionMovie.movieId);
-			await movieQ.prefetch(queryClient);
-		}
+	for (const sessionMovie of session.movies) {
+		const movieQ = MovieQuery(sessionMovie.movieId);
+		await movieQ.prefetch(queryClient);
 	}
 
 	return {

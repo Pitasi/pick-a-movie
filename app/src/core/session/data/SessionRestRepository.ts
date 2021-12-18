@@ -22,10 +22,9 @@ export interface ApiSession {
 export class SessionRestRepository implements SessionRepository {
 	async get(id: SessionId): Promise<Session | undefined> {
 		const res = await axios.get<ApiSession>(`${baseURL}/v1/sessions/${id}`, {
-			validateStatus: (status) =>
-				(status >= 200 && status < 300) || status === 404,
+			validateStatus: () => true,
 		});
-		if (res.status === 404) {
+		if (res.status !== 200) {
 			return undefined;
 		}
 

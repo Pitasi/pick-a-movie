@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps<SessionPageProps> = async (ctx) => {
 			dehydratedState: dehydrate(queryClient),
 			id,
 		},
-		revalidate: 30,
+		revalidate: 5,
 	};
 };
 

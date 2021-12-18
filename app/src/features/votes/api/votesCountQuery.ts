@@ -1,17 +1,17 @@
-import { MovieId, SessionId, Vote, VoteInMemoryRepository } from "@/core";
+import { MovieId, Session, Vote, VoteRestRepository } from "@/core";
 import { GetVotesBySessionMovieUseCase } from "@/core/vote/domain/GetVotesBySessionMovieUseCase";
 import { Query } from "@/lib/api/query";
 
 export const getVotes = async (
-	sessionId: SessionId,
+	session: Session,
 	movieId: MovieId
 ): Promise<Vote[]> => {
-	const votesRepository = new VoteInMemoryRepository();
+	const votesRepository = new VoteRestRepository();
 	const getVotesBySessionMovieUseCase = new GetVotesBySessionMovieUseCase(
 		votesRepository
 	);
-	return await getVotesBySessionMovieUseCase.execute(sessionId, movieId);
+	return await getVotesBySessionMovieUseCase.execute(session, movieId);
 };
 
-export const VotesCountQuery = (sessionId: SessionId, movieId: MovieId) =>
-	new Query(`votescount-${movieId}`, () => getVotes(sessionId, movieId));
+export const VotesCountQuery = (session: Session, movieId: MovieId) =>
+	new Query(`votescount-${movieId}`, () => getVotes(session, movieId));

@@ -13,7 +13,8 @@ export const VotesBar: FC<VotesBarProps> = ({ movieId }) => {
 	const session = useSessionContext();
 	const addVoteMutation = useVoteMutation();
 
-	const d = useResult(VotesCountQuery(session.id, movieId));
+	const d = useResult(VotesCountQuery(session, movieId));
+
 	if (!d.data) {
 		return <p>Loading votes...</p>;
 	}
@@ -23,7 +24,7 @@ export const VotesBar: FC<VotesBarProps> = ({ movieId }) => {
 		if (!voted) {
 			localStorage.setItem(`vote-${session.id}-${movieId}`, "true");
 			await addVoteMutation.mutateAsync({
-				sessionId: session.id,
+				session: session,
 				movieId,
 			});
 		} else {

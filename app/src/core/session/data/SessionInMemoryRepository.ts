@@ -9,9 +9,11 @@ const sessions: SessionDb = {
 	"2": new Session("2", "Another one", [
 		{
 			movieId: "580489",
+			proposalId: "1",
 		},
 		{
 			movieId: "634649",
+			proposalId: "2",
 		},
 	]),
 };

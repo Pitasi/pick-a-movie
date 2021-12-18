@@ -18,7 +18,7 @@ export const useAddMovieMutation = () => {
 	const onMutate = ({ session, movie }: AddMovieMutationParams) => {
 		const optimisticSession = new Session(session.id, session.title, [
 			...session.movies,
-			new SessionMovie(movie),
+			new SessionMovie(movie, "local"),
 		]);
 		queryClient.setQueryData<Session>(
 			["session", session.id],

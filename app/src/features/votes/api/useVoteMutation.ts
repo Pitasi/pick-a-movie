@@ -1,17 +1,18 @@
-import { MovieId, SessionId, Vote } from "@/core";
+import { MovieId, Session, Vote, VoteRestRepository } from "@/core";
 import { useMutation, useQueryClient } from "react-query";
 
 export interface UseVoteMutationParams {
-	sessionId: SessionId;
+	session: Session;
 	movieId: MovieId;
 }
 
 export const useVoteMutation = () => {
 	const queryClient = useQueryClient();
+	const votesRepository = new VoteRestRepository();
 
-	const onMutate = ({ sessionId, movieId }: UseVoteMutationParams) => {
+	const onMutate = ({ session, movieId }: UseVoteMutationParams) => {
 		const optimisticVote = {
-			sessionId,
+			sessionId: session.id,
 			movieId,
 			author: "me",
 			date: new Date(),
@@ -24,19 +25,10 @@ export const useVoteMutation = () => {
 	};
 
 	return useMutation(
-		async ({ sessionId, movieId }: UseVoteMutationParams): Promise<Vote> => {
-			// TODO: persist vote and return it for real
-			return new Promise((resolve) => {
-				setTimeout(
-					() =>
-						resolve({
-							sessionId,
-							movieId,
-							author: "Antonio",
-							date: new Date(),
-						}),
-					1000
-				);
+		async ({ session, movieId }: UseVoteMutationParams): Promise<Vote> => {
+			return await votesRepository.save({
+				session,
+				movieId,
 			});
 		},
 		{

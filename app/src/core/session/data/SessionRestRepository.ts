@@ -1,9 +1,8 @@
+import { baseURL } from "@/core/config";
 import axios from "axios";
 import { Session, SessionId } from "../domain/session";
 import { SessionMovie } from "../domain/SessionMovie";
 import { SessionRepository } from "../domain/SessionRepository";
-
-const baseURL = process.env.BACKEND_URL || "https://pick-a-movie-api.anto.pt";
 
 export interface ApiProposal {
 	id: string;
@@ -34,7 +33,10 @@ export class SessionRestRepository implements SessionRepository {
 		return new Session(
 			apiSession.id.toString(),
 			apiSession.title,
-			apiSession.proposals.map((p) => ({ movieId: p.movieId }))
+			apiSession.proposals.map((p) => ({
+				proposalId: p.id.toString(),
+				movieId: p.movieId.toString(),
+			}))
 		);
 	}
 

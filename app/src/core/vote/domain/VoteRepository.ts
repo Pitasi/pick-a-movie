@@ -1,15 +1,14 @@
 import { MovieId } from "../../movie";
-import { SessionId } from "../../session";
+import { Session } from "../../session";
 import { Vote } from "./vote";
 
 export interface VoteSaveRequest {
-	sessionId: SessionId;
+	session: Session;
 	movieId: MovieId;
-	author: string;
 }
 
 export interface VoteRepository {
-	getBySessionMovie(sessionId: SessionId, movieId: MovieId): Promise<Vote[]>;
+	getBySessionMovie(session: Session, movieId: MovieId): Promise<Vote[]>;
 
 	save(req: VoteSaveRequest): Promise<Vote>;
 }

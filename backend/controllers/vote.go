@@ -65,6 +65,7 @@ func createVote(dm *lib.DBManager) http.HandlerFunc {
 
 		item := &models.Vote{
 			ProposalId: rq.ProposalId,
+			VoterId:    rq.VoterId,
 		}
 
 		_, err = dm.DB.Model(item).Insert()

@@ -63,6 +63,12 @@ func createVote(dm *lib.DBManager) http.HandlerFunc {
 			return
 		}
 
+		if len(rq.VoterId) == 0 {
+			rw.WriteHeader(400)
+			log.Printf("[E]: missing voterId")
+			return
+		}
+
 		item := &models.Vote{
 			ProposalId: rq.ProposalId,
 			VoterId:    rq.VoterId,

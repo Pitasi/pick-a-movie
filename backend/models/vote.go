@@ -9,5 +9,5 @@ type Vote struct {
 
 type CreateVoteRequest struct {
 	ProposalId int64  `json:"id" validate:"required"`
-	VoterId    string `json:"voter_id" validate:"required"`
+	VoterId    string `json:"voterId" validate:"required"`
 } //@name CreateVoteRequest

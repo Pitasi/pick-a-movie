@@ -23,17 +23,20 @@ export const MovieCard = ({ movie }: MovieProps) => {
 	// 	queryClient.getQueryData<string>(["img", d.data.posterPath]);
 
 	return (
-		<article>
-			<p>{d.data.title}</p>
+		<article className="p-1 bg-gray-800">
 			<Image
 				src={d.data.posterPath || fallbackPath}
 				alt={d.data.title}
 				height={450}
 				width={300}
+				className="rounded-3xl"
 				// placeholder={blurDataUrl ? "blur" : undefined}
 				// blurDataURL={blurDataUrl}
 			/>
-			<VotesBar movieId={d.data.id} />
+			<div className="px-4 py-6">
+				<h2 className="text-2xl">{d.data.title}</h2>
+				<VotesBar movieId={d.data.id} />
+			</div>
 		</article>
 	);
 };

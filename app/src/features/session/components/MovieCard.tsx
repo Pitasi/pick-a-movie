@@ -8,7 +8,7 @@ export interface MovieCardsProps {
 
 const MovieCards = ({ movies }: MovieCardsProps) =>
 	movies && movies.length ? (
-		<div>
+		<div className="grid gap-6">
 			{movies.map((movie) => (
 				<MovieCard key={movie.movieId} movie={movie} />
 			))}

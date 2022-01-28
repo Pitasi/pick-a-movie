@@ -74,7 +74,6 @@ export default () => {
 	if (submission) {
 		return (
 			<div>
-				<p>{JSON.stringify(submission)}</p>
 				<p>loading (an optimistic ui would show your movies here)...</p>
 			</div>
 		);

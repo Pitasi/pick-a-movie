@@ -21,7 +21,13 @@ export const action: ActionFunction = async ({
 	const redirectTo = validateString(form.get("redirectTo"), "redirectTo");
 
 	const userId = await requireUserId(request, redirectTo);
-	await addVote(proposalId, userId);
+
+	try {
+		await addVote(proposalId, userId);
+	} catch (e) {
+		console.error("couldn't add your vote:", e);
+		return redirect(redirectTo);
+	}
 
 	return redirect(redirectTo);
 };

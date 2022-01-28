@@ -50,14 +50,11 @@ export const action: ActionFunction = async ({
 	const form = await request.formData();
 	const movieId = form.get("movieId");
 
-	console.log("adding new proposal");
-
 	if (!sessionId || !movieId || typeof movieId !== "string") {
 		throw new Error("sessionId and movieId are required");
 	}
 
 	await addMovieToSession(sessionId, movieId);
-	console.log("done");
 	return null;
 };
 

@@ -22,7 +22,7 @@ export default () => {
 
 	return (
 		<div>
-			<h1>Login</h1>
+			<h1>Register or login by entering your data below:</h1>
 			<Form method="post">
 				<input type="hidden" name="redirectTo" value={redirectTo} />
 				<input type="email" name="email" placeholder="email@example.com" />

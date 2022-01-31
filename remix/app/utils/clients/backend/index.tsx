@@ -93,6 +93,8 @@ export interface TmdbMovie {
 	original_title: string;
 	poster_path?: string;
 	imdb_id: string;
+	overview?: string;
+	release_date?: string;
 }
 
 async function getMovie(id: MovieId): Promise<TmdbMovie | null> {

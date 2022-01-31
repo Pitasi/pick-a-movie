@@ -1,4 +1,4 @@
-import { ActionFunction, Outlet, redirect } from "remix";
+import { ActionFunction, Link, Outlet, redirect } from "remix";
 import { newSession } from "~/utils/clients/backend";
 
 function validateTitle(title: FormDataEntryValue | null): string {
@@ -40,4 +40,4 @@ export const action: ActionFunction = async ({
 	return redirect(`/sessions/${session.id}`);
 };
 
-export default () => <Outlet />;
+export default () => <Link to="/">Homepage</Link>;

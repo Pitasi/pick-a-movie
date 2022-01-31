@@ -6,14 +6,13 @@ import {
 	MetaFunction,
 	PrefetchPageLinks,
 	useLoaderData,
-	useTransition,
 } from "remix";
 import {
 	addMovieToSession,
 	getSession,
-	Proposal,
 	Session,
 } from "~/utils/clients/backend";
+import MovieCard from "~/components/MovieCard/MovieCard";
 
 const UNTITLED_SESSION = "Untitled Session";
 
@@ -60,19 +59,7 @@ export const action: ActionFunction = async ({
 
 export default () => {
 	const { session } = useLoaderData<LoaderData>();
-	const { submission } = useTransition();
 	const [prefetchLink, setPrefetchLink] = useState<string>();
-
-	const disableVoteButton = (p: Proposal) => {
-		return submission && submission.formData.get("proposalId") === p.id;
-	};
-
-	const votesCount = (p: Proposal) => {
-		if (submission && submission.formData.get("proposalId") === p.id) {
-			return p.votes.length + 1;
-		}
-		return p.votes.length;
-	};
 
 	return (
 		<section>
@@ -96,34 +83,11 @@ export default () => {
 				{prefetchLink && <PrefetchPageLinks page={prefetchLink} />}
 			</Form>
 
-			{session.proposals.map((p) => (
-				<article key={p.id} className="border-2 border-blue-600">
-					<p>{p.movie?.title}</p>
-					<Form
-						method="post"
-						action="/add-vote"
-						replace
-						onSubmit={() => {
-							localStorage.setItem(p.id, "true");
-						}}
-					>
-						<input
-							type="hidden"
-							name="redirectTo"
-							value={`/sessions/${session.id}`}
-						/>
-						<button
-							disabled={disableVoteButton(p)}
-							type="submit"
-							value={p.id}
-							name="proposalId"
-							className="bg-pink-400"
-						>
-							Vote ({votesCount(p)})
-						</button>
-					</Form>
-				</article>
-			))}
+			<main className="w-full max-w-xs">
+				{session.proposals.map((p) => (
+					<MovieCard proposal={p} key={p.id} sessionId={session.id} />
+				))}
+			</main>
 		</section>
 	);
 };

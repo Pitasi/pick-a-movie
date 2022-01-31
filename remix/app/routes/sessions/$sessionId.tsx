@@ -62,14 +62,18 @@ export default () => {
 	const [prefetchLink, setPrefetchLink] = useState<string>();
 
 	return (
-		<section>
-			<h1>
-				{session.title || UNTITLED_SESSION} ({session.proposals.length} movies)
-			</h1>
+		<section className="flex flex-col gap-12 p-16">
+			<div>
+				<h1 className="text-4xl font-light">
+					{session.title || UNTITLED_SESSION}
+				</h1>
+				<p className="text-sm font-bold">({session.proposals.length} movies)</p>
+			</div>
 
-			<Form method="get" action="/search">
+			<Form method="get" action="/search" className="flex flex-row w-full">
 				<input type="hidden" name="sessionId" value={session.id} />
 				<input
+					className="flex grow p-4 text-black rounded-l-3xl"
 					type="search"
 					name="q"
 					placeholder="Search for a movie"
@@ -79,15 +83,20 @@ export default () => {
 						)
 					}
 				/>
-				<button type="submit">Search</button>
+				<button
+					type="submit"
+					className="p-4 bg-white text-black font-bold rounded-r-3xl"
+				>
+					Search
+				</button>
 				{prefetchLink && <PrefetchPageLinks page={prefetchLink} />}
 			</Form>
 
-			<main className="w-full max-w-xs">
+			<section className="grid grid-cols-4 gap-16">
 				{session.proposals.map((p) => (
 					<MovieCard proposal={p} key={p.id} sessionId={session.id} />
 				))}
-			</main>
+			</section>
 		</section>
 	);
 };

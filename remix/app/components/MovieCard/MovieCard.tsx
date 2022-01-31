@@ -21,6 +21,11 @@ const MovieCard: FC<MovieCardProps> = ({ proposal, sessionId }) => {
 		return p.votes.length;
 	};
 
+	const releaseDate =
+		proposal.movie?.release_date !== undefined
+			? new Date(proposal.movie.release_date)
+			: undefined;
+
 	return (
 		<article
 			key={proposal.id}
@@ -50,19 +55,19 @@ const MovieCard: FC<MovieCardProps> = ({ proposal, sessionId }) => {
 						type="submit"
 						value={proposal.id}
 						name="proposalId"
-						className="bg-white rounded-3xl px-4 py-2 text-md font-bold"
+						className="bg-white rounded-3xl px-4 py-2 text-md font-bold text-gray-800"
 					>
 						❤️&nbsp;&nbsp;{votesCount(proposal)}
 					</button>
 				</Form>
 			</div>
 
-			<div className="flex flex-col px-6 pb-6 relative gap-8">
-				<div className="flex flex-col gap-2">
-					<div className="flex flex-row items-end gap-2">
-						<h2 className="text-white text-3xl">{proposal.movie?.title}</h2>
-						<p className="text-gray-400 text-lg">
-							{proposal.movie?.release_date}
+			<div className="flex flex-col px-6 pb-6 relative gap-4">
+				<div className="flex flex-col gap-4">
+					<div className="flex flex-row items-end justify-between">
+						<h2 className="text-3xl">{proposal.movie?.title}</h2>
+						<p className="text-gray-400 text-sm font-bold">
+							{releaseDate?.getFullYear()}
 						</p>
 					</div>
 
@@ -71,7 +76,7 @@ const MovieCard: FC<MovieCardProps> = ({ proposal, sessionId }) => {
 					</div>
 				</div>
 
-				<div className="flex flex-row items-end gap-4 text-white font-bold text-xs">
+				<div className="flex flex-row items-end gap-4 font-bold text-xs">
 					<Link to="#" className="uppercase">
 						Trailer
 					</Link>

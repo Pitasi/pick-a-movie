@@ -29,7 +29,7 @@ export default () => {
 
 	return (
 		<section>
-			<header className="flex flex-row w-full justify-between p-16">
+			<header className="flex flex-row w-full items-center justify-between p-16">
 				<section>
 					<p className="text-3xl">🎬 Pick a movie</p>
 				</section>

@@ -70,10 +70,14 @@ export default () => {
 				<p className="text-sm font-bold">({session.proposals.length} movies)</p>
 			</div>
 
-			<Form method="get" action="/search" className="flex flex-row w-full">
+			<Form
+				method="get"
+				action="/search"
+				className="flex flex-shrink-0 flex-row w-full rounded-3xl overflow-hidden"
+			>
 				<input type="hidden" name="sessionId" value={session.id} />
 				<input
-					className="flex grow p-4 text-black rounded-l-3xl"
+					className="flex grow p-4 text-black"
 					type="search"
 					name="q"
 					placeholder="Search for a movie"
@@ -83,16 +87,13 @@ export default () => {
 						)
 					}
 				/>
-				<button
-					type="submit"
-					className="p-4 bg-white text-black font-bold rounded-r-3xl"
-				>
+				<button type="submit" className="p-4 bg-white text-black font-bold">
 					Search
 				</button>
 				{prefetchLink && <PrefetchPageLinks page={prefetchLink} />}
 			</Form>
 
-			<section className="grid grid-cols-4 gap-16">
+			<section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
 				{session.proposals.map((p) => (
 					<MovieCard proposal={p} key={p.id} sessionId={session.id} />
 				))}

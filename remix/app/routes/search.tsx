@@ -80,36 +80,63 @@ export default () => {
 	}
 
 	return (
-		<section>
-			<Link prefetch="render" to={`/sessions/${session.id}`}>
-				Back to {session.title}
-			</Link>
+		<section className="flex flex-col gap-16">
+			<p className="text-sm font-bold">
+				Add a new proposal to&nbsp;
+				<Link
+					prefetch="render"
+					to={`/sessions/${session.id}`}
+					className="underline"
+				>
+					{session.title}
+				</Link>
+			</p>
 
-			<Form>
+			<Form
+				method="get"
+				action="/search"
+				className="flex flex-shrink-0 flex-row w-full rounded-3xl overflow-hidden"
+			>
 				<input type="hidden" name="sessionId" value={session.id} />
 				<input
+					className="flex grow p-4 text-black"
 					type="search"
 					name="q"
 					placeholder="Search for a movie"
 					defaultValue={q}
 				/>
-				<button type="submit">Search</button>
+				<button type="submit" className="p-4 bg-white text-black font-bold">
+					Search
+				</button>
 			</Form>
 
 			<Form method="post" action={`/sessions/${session.id}`}>
 				<input type="hidden" name="intent" value="add-movie" />
-				{results.map((r) => (
-					<div key={r.id}>
-						<button
-							disabled={isMoviePresent(r)}
-							type="submit"
-							name="movieId"
-							value={r.id}
-						>
-							{r.title}
-						</button>
-					</div>
-				))}
+				<div className="grid grid-cols-7 gap-8">
+					{results.map((r) => (
+						<div key={r.id}>
+							<button
+								disabled={isMoviePresent(r)}
+								type="submit"
+								name="movieId"
+								value={r.id}
+							>
+								<div className="relative shadow-2xl rounded-3xl shadow-black">
+									<img
+										className="flex rounded-3xl"
+										style={{ opacity: isMoviePresent(r) ? 0.2 : 1 }}
+										src={`https://image.tmdb.org/t/p/w500/${r?.poster_path}`}
+									/>
+									{/* <img
+					className="flex rounded-3xl absolute top-0 left-0"
+					style={{ filter: "blur(5px) saturate(3)", transform: "scale(1.02)" }}
+					src={`https://image.tmdb.org/t/p/w500/${proposal.movie?.poster_path}`}
+				/> */}
+								</div>
+							</button>
+						</div>
+					))}
+				</div>
 			</Form>
 		</section>
 	);

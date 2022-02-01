@@ -2,7 +2,7 @@ import { Form, Link, LoaderFunction, useLoaderData } from "remix";
 import { getUser, getUserId, User } from "~/utils/session.server";
 
 interface LoaderData {
-	user: User | null;
+	user: User | undefined;
 }
 
 export const loader: LoaderFunction = async ({
@@ -10,7 +10,7 @@ export const loader: LoaderFunction = async ({
 }): Promise<LoaderData> => {
 	const userId = await getUserId(request);
 	return {
-		user: userId ? await getUser(userId) : null,
+		user: userId ? await getUser(userId) : undefined,
 	};
 };
 
@@ -18,25 +18,64 @@ export default function Index() {
 	const { user } = useLoaderData<LoaderData>();
 
 	return (
-		<div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-			<h1 className="text-pink-500 font-bold text-3xl">
-				Welcome to pick a movie
-			</h1>
-			{user === null ? (
-				<Link to="/login">Login</Link>
-			) : (
-				<p>Welcome back {user.email}. Logout is not implemented yet.</p>
-			)}
-			<Form method="post" action="/new-session">
-				<h2>Create a new poll</h2>
-				<input type="text" name="title" placeholder="Title" />
-				<details>
-					<summary>Other options</summary>
-					<input type="datetime-local" name="startAt" />
-					<input type="datetime-local" name="endAt" />
-				</details>
-				<button type="submit">Create</button>
-			</Form>
-		</div>
+		<section>
+			<header className="flex flex-row w-full items-center justify-between p-16">
+				<section>
+					<p className="text-3xl">🎬 Pick a movie</p>
+				</section>
+
+				<section className="text-xl">
+					{user === undefined ? (
+						<Link to={`/login`}>Login</Link>
+					) : (
+						<p>{user?.email}</p>
+					)}
+				</section>
+			</header>
+			<main className="flex flex-col p-16 gap-6">
+				<h2 className="text-3xl">Create a new poll</h2>
+				<Form
+					method="post"
+					action="/new-session"
+					className="flex flex-col gap-4"
+				>
+					<input
+						type="text"
+						name="title"
+						placeholder="Title"
+						className="p-4 text-black flex rounded-3xl w-full"
+						required
+					/>
+					<details>
+						<summary>Advanced options</summary>
+						<div className="flex flex-col gap-4">
+							<div>
+								<label htmlFor="startAt">Voting starts at</label>
+								<input
+									className="text-black p-4 w-full rounded-3xl"
+									type="datetime-local"
+									name="startAt"
+								/>
+							</div>
+
+							<div>
+								<label htmlFor="startAt">Voting ends at</label>
+								<input
+									className="text-black p-4 w-full rounded-3xl"
+									type="datetime-local"
+									name="endAt"
+								/>
+							</div>
+						</div>
+					</details>
+					<button
+						type="submit"
+						className="gap-4 rounded-3xl px-8 py-2 bg-pink-400"
+					>
+						Create
+					</button>
+				</Form>
+			</main>
+		</section>
 	);
 }

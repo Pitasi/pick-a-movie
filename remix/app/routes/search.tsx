@@ -126,6 +126,7 @@ export default () => {
 										className="flex rounded-3xl"
 										style={{ opacity: isMoviePresent(r) ? 0.2 : 1 }}
 										src={`https://image.tmdb.org/t/p/w500/${r?.poster_path}`}
+										alt={r.title}
 									/>
 									{/* <img
 					className="flex rounded-3xl absolute top-0 left-0"

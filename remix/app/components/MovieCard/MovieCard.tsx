@@ -1,17 +1,27 @@
 import { FC } from "react";
-import { Form, Link, useTransition } from "remix";
+import { Form, Link, useMatches, useTransition } from "remix";
 import { Proposal, SessionId } from "~/utils/clients/backend";
+import { User } from "~/utils/session.server";
 
 export interface MovieCardProps {
 	proposal: Proposal;
 	sessionId: SessionId;
 }
 
+const useUser = (): User | undefined => {
+	const matches = useMatches();
+	return matches.find((m) => m.id === "routes/sessions")?.data?.user;
+};
+
 const MovieCard: FC<MovieCardProps> = ({ proposal, sessionId }) => {
 	const { submission } = useTransition();
+	const user = useUser();
 
 	const disableVoteButton = (p: Proposal) => {
-		return submission && submission.formData.get("proposalId") === p.id;
+		return (
+			(submission && submission.formData.get("proposalId") === p.id) ||
+			p.votes.some((v) => v.voterId === user?.id)
+		);
 	};
 
 	const votesCount = (p: Proposal) => {
@@ -55,14 +65,29 @@ const MovieCard: FC<MovieCardProps> = ({ proposal, sessionId }) => {
 						type="submit"
 						value={proposal.id}
 						name="proposalId"
-						className="bg-white rounded-3xl px-4 py-2 text-md font-bold text-gray-800"
+						className="bg-white rounded-3xl px-4 py-2 text-md font-bold text-gray-800 backdrop-blur-md"
+						style={{
+							backgroundColor: disableVoteButton(proposal)
+								? "white"
+								: "rgba(255,255,255,0.45)",
+						}}
 					>
-						❤️&nbsp;&nbsp;{votesCount(proposal)}
+						<span
+							style={{
+								filter: disableVoteButton(proposal)
+									? "saturate(1)"
+									: "saturate(0.3)",
+							}}
+						>
+							❤️
+						</span>
+						&nbsp;&nbsp;
+						{votesCount(proposal)}
 					</button>
 				</Form>
 			</div>
 
-			<div className="flex flex-col px-6 pb-6 relative gap-4">
+			<div className="flex flex-col px-6 pb-6 relative gap-10 grow">
 				<div className="flex flex-col gap-4">
 					<div className="flex flex-row items-end justify-between">
 						<h2 className="text-3xl">{proposal.movie?.title}</h2>
@@ -71,12 +96,12 @@ const MovieCard: FC<MovieCardProps> = ({ proposal, sessionId }) => {
 						</p>
 					</div>
 
-					<div className="flex flex-row items-end text-sm text-gray-200">
+					<div className="flex flex-row items-end text-sm text-gray-200 line-clamp-3">
 						<p>{proposal.movie?.overview}</p>
 					</div>
 				</div>
 
-				<div className="flex flex-row items-end gap-4 font-bold text-xs">
+				<div className="flex flex-row items-end gap-4 font-bold text-xs grow place-self-stretch">
 					<Link to="#" className="uppercase">
 						Trailer
 					</Link>

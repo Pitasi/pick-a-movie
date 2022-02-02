@@ -112,7 +112,7 @@ export default () => {
 
 			<Form method="post" action={`/sessions/${session.id}`}>
 				<input type="hidden" name="intent" value="add-movie" />
-				<div className="grid grid-cols-7 gap-8">
+				<div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-7 gap-8">
 					{results.map((r) => (
 						<div key={r.id}>
 							<button
@@ -128,11 +128,6 @@ export default () => {
 										src={`https://image.tmdb.org/t/p/w500/${r?.poster_path}`}
 										alt={r.title}
 									/>
-									{/* <img
-					className="flex rounded-3xl absolute top-0 left-0"
-					style={{ filter: "blur(5px) saturate(3)", transform: "scale(1.02)" }}
-					src={`https://image.tmdb.org/t/p/w500/${proposal.movie?.poster_path}`}
-				/> */}
 								</div>
 							</button>
 						</div>

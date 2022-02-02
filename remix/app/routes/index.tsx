@@ -1,4 +1,5 @@
 import { Form, Link, LoaderFunction, useLoaderData } from "remix";
+import Header from "~/components/Header/Header";
 import { getUser, getUserId, User } from "~/utils/session.server";
 
 interface LoaderData {
@@ -19,19 +20,7 @@ export default function Index() {
 
 	return (
 		<section>
-			<header className="flex flex-row w-full items-center justify-between p-16">
-				<section>
-					<p className="text-3xl">🎬 Pick a movie</p>
-				</section>
-
-				<section className="text-xl">
-					{user === undefined ? (
-						<Link to={`/login`}>Login</Link>
-					) : (
-						<p>{user?.email}</p>
-					)}
-				</section>
-			</header>
+			<Header user={user} />
 			<main className="flex flex-col p-16 gap-6">
 				<h2 className="text-3xl">Create a new poll</h2>
 				<Form
@@ -48,7 +37,7 @@ export default function Index() {
 					/>
 					<details>
 						<summary>Advanced options</summary>
-						<div className="flex flex-col gap-4">
+						<div className="flex flex-col gap-4 p-4">
 							<div>
 								<label htmlFor="startAt">Voting starts at</label>
 								<input

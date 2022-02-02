@@ -13,6 +13,7 @@ import {
 	Session,
 } from "~/utils/clients/backend";
 import MovieCard from "~/components/MovieCard/MovieCard";
+import MovieSearchbar from "~/components/MovieSearchbar/MovieSearchbar";
 
 const UNTITLED_SESSION = "Untitled Session";
 
@@ -59,10 +60,9 @@ export const action: ActionFunction = async ({
 
 export default () => {
 	const { session } = useLoaderData<LoaderData>();
-	const [prefetchLink, setPrefetchLink] = useState<string>();
 
 	return (
-		<section className="flex flex-col gap-12 p-16">
+		<section className="flex flex-col gap-12 px-8 py-16">
 			<div>
 				<h1 className="text-4xl font-light">
 					{session.title || UNTITLED_SESSION}
@@ -70,28 +70,7 @@ export default () => {
 				<p className="text-sm font-bold">({session.proposals.length} movies)</p>
 			</div>
 
-			<Form
-				method="get"
-				action="/search"
-				className="flex flex-shrink-0 flex-row w-full rounded-3xl overflow-hidden"
-			>
-				<input type="hidden" name="sessionId" value={session.id} />
-				<input
-					className="flex grow p-4 text-black"
-					type="search"
-					name="q"
-					placeholder="Search for a movie"
-					onChange={(e) =>
-						setPrefetchLink(
-							`/search?sessionId=${session.id}&q=${e.target.value}`
-						)
-					}
-				/>
-				<button type="submit" className="p-4 bg-white text-black font-bold">
-					Search
-				</button>
-				{prefetchLink && <PrefetchPageLinks page={prefetchLink} />}
-			</Form>
+			<MovieSearchbar sessionId={session.id} />
 
 			<section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
 				{session.proposals.map((p) => (

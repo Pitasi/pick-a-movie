@@ -7,6 +7,7 @@ import {
 	useLoaderData,
 	useTransition,
 } from "remix";
+import MovieSearchbar from "~/components/MovieSearchbar/MovieSearchbar";
 import { getSession, Movie, search, Session } from "~/utils/clients/backend";
 
 export const meta: MetaFunction = ({ data }) => {
@@ -74,13 +75,16 @@ export default () => {
 	if (submission) {
 		return (
 			<div>
-				<p>loading (an optimistic ui would show your movies here)...</p>
+				<p>
+					loading (an optimistic ui would show your movies here but can keep you
+					busy with this text so why even bother)...
+				</p>
 			</div>
 		);
 	}
 
 	return (
-		<section className="flex flex-col gap-16">
+		<section className="flex flex-col gap-16 px-4 py-16">
 			<p className="text-sm font-bold">
 				Add a new proposal to&nbsp;
 				<Link
@@ -92,23 +96,7 @@ export default () => {
 				</Link>
 			</p>
 
-			<Form
-				method="get"
-				action="/search"
-				className="flex flex-shrink-0 flex-row w-full rounded-3xl overflow-hidden"
-			>
-				<input type="hidden" name="sessionId" value={session.id} />
-				<input
-					className="flex grow p-4 text-black"
-					type="search"
-					name="q"
-					placeholder="Search for a movie"
-					defaultValue={q}
-				/>
-				<button type="submit" className="p-4 bg-white text-black font-bold">
-					Search
-				</button>
-			</Form>
+			<MovieSearchbar sessionId={session.id} defaultValue={q} />
 
 			<Form method="post" action={`/sessions/${session.id}`}>
 				<input type="hidden" name="intent" value="add-movie" />
@@ -116,12 +104,13 @@ export default () => {
 					{results.map((r) => (
 						<div key={r.id}>
 							<button
+								className="w-full h-full"
 								disabled={isMoviePresent(r)}
 								type="submit"
 								name="movieId"
 								value={r.id}
 							>
-								<div className="relative shadow-2xl rounded-3xl shadow-black">
+								<div className="flex items-center justify-around h-full shadow-2xl rounded-3xl shadow-black">
 									<img
 										className="flex rounded-3xl"
 										style={{ opacity: isMoviePresent(r) ? 0.2 : 1 }}
